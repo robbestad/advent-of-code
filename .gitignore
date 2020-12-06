@@ -1,6 +1,6 @@
 a.out
 .idea
-solve
+solve*
 .vscode
 cmake-build-debug
 *.py
