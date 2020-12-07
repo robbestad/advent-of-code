@@ -1,6 +1,7 @@
 a.out
+ignore
+*.gch
 .idea
-solve*
 .vscode
 cmake-build-debug
 *.py

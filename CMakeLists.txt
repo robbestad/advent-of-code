@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.17)
 project(aoc)
+include_directories(/usr/local/include)
 
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(aoc
-        "day 6/main.cpp" binaryToDecimal.h lesFil.h parser.h split.h tokenize.h)
+        "solve.cpp"
+        "source/days/7.h"
+        source/include/binaryToDecimal.h source/include/lesFil.h source/include/parser.h source/include/split.h source/include/tokenize.h)

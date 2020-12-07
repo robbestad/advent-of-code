@@ -1,0 +1,59 @@
+#include <benchmark/benchmark.h>
+#include "source/day_6/main.h"
+#include "source/day_5/main.h"
+#include "source/day_4/main.h"
+#include "source/days/7.h"
+#include "source/days/7_2.h"
+
+static void BM_4_1(benchmark::State &state) {
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day4::part1());
+    }
+}
+
+static void BM_4_2(benchmark::State &state) {
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day4::part1());
+    }
+}
+
+static void BM_5(benchmark::State &state) {
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day5::solve());
+    }
+}
+
+static void BM_6_1(benchmark::State &state) {
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day6::part1());
+    }
+}
+
+static void BM_6_2(benchmark::State &state) {
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day6::part2());
+    }
+}
+
+static void BM_7_1(benchmark::State &state) {
+    day7::parse_input("input/7_input.txt");
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day7::solve());
+    }
+}
+
+static void BM_7_2(benchmark::State &state) {
+    day7b::parse_input("input/7_input.txt");
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day7b::solve());
+    }
+}
+
+//BENCHMARK(BM_4_1)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_4_2)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_5)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_6_1)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_6_2)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_7_1)->Unit(benchmark::kMillisecond);
+BENCHMARK(BM_7_2)->Unit(benchmark::kMillisecond);
+BENCHMARK_MAIN();

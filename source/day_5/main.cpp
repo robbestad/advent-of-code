@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "../binaryToDecimal.h"
-#include "../parser.h"
+#include "../include/binaryToDecimal.h"
+#include "../include/parser.h"
 
 using namespace std;
 

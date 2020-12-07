@@ -1,10 +1,8 @@
 //
 // borrowed from https://github.com/fredrikpe/advent-of-code-2020/blob/master/cpp/input_parser.h
 //
-
 #ifndef AOC_PARSER_H
 #define AOC_PARSER_H
-
 #endif //AOC_PARSER_H
 
 template<class Function>

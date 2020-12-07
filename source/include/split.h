@@ -4,6 +4,15 @@
 
 #ifndef AOC_SPLIT_H
 #define AOC_SPLIT_H
+#include <sstream>
+
+void split(const std::string &content, char pattern, std::vector<std::string> &elements) {
+    std::stringstream ss(content);
+    std::string str;
+    while (getline(ss, str, pattern)) {
+        elements.push_back(str);
+    }
+}
 
 std::vector<std::string_view> split(std::string_view str, std::string_view delimiter, bool include_empty) {
     std::vector<std::string_view> parts;
