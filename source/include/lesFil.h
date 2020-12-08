@@ -5,7 +5,6 @@
 #ifndef AOC_LESFIL_H
 #define AOC_LESFIL_H
 
-#endif //AOC_LESFIL_H
 std::vector<std::string> lesFil(std::string const &fil) {
     std::ifstream inFile;
 
@@ -27,3 +26,4 @@ std::vector<std::string> lesFil(std::string const &fil) {
     inFile.close();
     return map;
 }
+#endif //AOC_LESFIL_H

@@ -5,7 +5,6 @@
 #ifndef AOC_BINARYTODECIMAL_H
 #define AOC_BINARYTODECIMAL_H
 
-#endif //AOC_BINARYTODECIMAL_H
 int binaryToDecimal(int n) {
     int num = n;
     int dec_value = 0;
@@ -20,3 +19,4 @@ int binaryToDecimal(int n) {
     }
     return dec_value;
 }
+#endif //AOC_BINARYTODECIMAL_H

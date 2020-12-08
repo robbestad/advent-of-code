@@ -3,7 +3,6 @@
 //
 #ifndef AOC_PARSER_H
 #define AOC_PARSER_H
-#endif //AOC_PARSER_H
 
 template<class Function>
 void parse_input_by_line(const std::string &path, Function f) {
@@ -51,3 +50,4 @@ void parse_input(const std::string &path, Function f) {
     fil.close();
     f(s);
 }
+#endif //AOC_PARSER_H

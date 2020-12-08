@@ -1,4 +1,5 @@
 a.out
+bin/*
 ignore
 *.gch
 .idea
