@@ -86,10 +86,16 @@ static void BM_8_2(benchmark::State &state) {
     }
 }
 
-static void BM_9_1(benchmark::State &state) {
+static void BM_9_1_fast(benchmark::State &state) {
     day9::parse_input("input/9.txt");
     for (auto _ : state) {
-        benchmark::DoNotOptimize(day9::part1());
+        benchmark::DoNotOptimize(day9::part1fast());
+    }
+}
+static void BM_9_1_slow(benchmark::State &state) {
+    day9::parse_input("input/9.txt");
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day9::part1slow());
     }
 }
 
@@ -98,6 +104,7 @@ static void BM_9_2_Kent(benchmark::State &state) {
     for (auto _ : state) {
         benchmark::DoNotOptimize(day9::part2());
     }
+
 }
 
 /*
@@ -129,7 +136,8 @@ static void BM_10_2(benchmark::State &state) {
 
 //BENCHMARK(BM_9_1_1)->Unit(benchmark::kMicrosecond);
 //BENCHMARK(BM_9_1_2)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_9_1)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_9_1_fast)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_9_1_slow)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_9_2_Kent)->Unit(benchmark::kMicrosecond);
 
 /*

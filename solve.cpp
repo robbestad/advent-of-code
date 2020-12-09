@@ -46,7 +46,7 @@ int main() {
     */
 
     day9::parse_input("input/9.txt");
-    std::cout << "9 part 1: " << day9::part1() << std::endl;
+    std::cout << "9 part 1: " << day9::part1fast() << std::endl;
     day9::parse_input("input/9.txt");
     std::cout << "9 part 2 (Kent): " << day9::part2() << std::endl;
 
