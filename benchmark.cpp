@@ -64,10 +64,16 @@ static void BM_8_2(benchmark::State &state) {
         benchmark::ClobberMemory();
     }
 }
-static void BM_9_1(benchmark::State &state) {
+static void BM_9_1_1(benchmark::State &state) {
     day9::parse_input("input/9_input");
     for (auto _ : state) {
         benchmark::DoNotOptimize(day9::part1());
+    }
+}
+static void BM_9_1_2(benchmark::State &state) {
+    day9::parse_input("input/9_input");
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day9::part1_alternative_solution());
     }
 }
 static void BM_9_2(benchmark::State &state) {
@@ -87,7 +93,8 @@ static void BM_9_2(benchmark::State &state) {
 //BENCHMARK(BM_8_1)->RangeMultiplier(2)->Range(1<<0, 1<<12)->Complexity()->Unit(benchmark::kMicrosecond);
 //BENCHMARK(BM_8_2)->Unit(benchmark::kMillisecond);
 
-BENCHMARK(BM_9_1)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_9_1_1)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_9_1_2)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_9_2)->Unit(benchmark::kMicrosecond);
 
 BENCHMARK_MAIN();

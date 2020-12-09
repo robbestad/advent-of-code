@@ -25,7 +25,9 @@ int main() {
     std::cout << "8-2: " << day8_2::solve() << std::endl;
     */
     day9::parse_input("input/9_input");
-    std::cout << "9_1: " << day9::part1() << std::endl;
+    std::cout << "9_1_1: " << day9::part1() << std::endl;
+    day9::parse_input("input/9_input");
+    std::cout << "9_1_2: " << day9::part1_alternative_solution() << std::endl;
     day9::parse_input("input/9_input");
     std::cout << "9_2: " << day9::part2() << std::endl;
 
