@@ -6,6 +6,7 @@
 #include "source/days/7_2.h"
 #include "source/days/8.h"
 #include "source/days/8_2.h"
+#include "source/days/9.h"
 
 static void BM_4_1(benchmark::State &state) {
     for (auto _ : state) {
@@ -60,9 +61,21 @@ static void BM_8_2(benchmark::State &state) {
     day8_2::parse_input("input/8_input.txt");
     for (auto _ : state) {
         benchmark::DoNotOptimize(day8_2::solve());
+        benchmark::ClobberMemory();
     }
 }
-
+static void BM_9_1(benchmark::State &state) {
+    day9::parse_input("input/9_input");
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day9::part1());
+    }
+}
+static void BM_9_2(benchmark::State &state) {
+    day9::parse_input("input/9_input");
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day9::part2());
+    }
+}
 //BENCHMARK(BM_4_1)->Unit(benchmark::kMicrosecond);
 //BENCHMARK(BM_4_2)->Unit(benchmark::kMicrosecond);
 //BENCHMARK(BM_5)->Unit(benchmark::kMicrosecond);
@@ -70,6 +83,11 @@ static void BM_8_2(benchmark::State &state) {
 //BENCHMARK(BM_6_2)->Unit(benchmark::kMicrosecond);
 //BENCHMARK(BM_7_1)->Unit(benchmark::kMillisecond);
 //BENCHMARK(BM_7_2)->Unit(benchmark::kMillisecond);
-BENCHMARK(BM_8_1)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_8_2)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_8_1)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_8_1)->RangeMultiplier(2)->Range(1<<0, 1<<12)->Complexity()->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_8_2)->Unit(benchmark::kMillisecond);
+
+BENCHMARK(BM_9_1)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_9_2)->Unit(benchmark::kMicrosecond);
+
 BENCHMARK_MAIN();

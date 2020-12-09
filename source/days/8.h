@@ -70,6 +70,7 @@ namespace day8 {
         } while (cnt);
         return acc;
     }
+
 }
 
 #endif //AOC_8_H
