@@ -46,17 +46,17 @@ int main() {
     */
 
     day9::parse_input("input/9.txt");
-    std::cout << "9 part 1_1:" << day9::part1() << std::endl;
+    std::cout << "9 part 1: " << day9::part1() << std::endl;
     day9::parse_input("input/9.txt");
-    std::cout << "9 part 1_2: " << day9::part1_alternative_solution() << std::endl;
-    day9::parse_input("input/9.txt");
-    std::cout << "9 part 2: " << day9::part2() << std::endl;
+    std::cout << "9 part 2 (Kent): " << day9::part2() << std::endl;
+
+    /*
 
     day10::parse_input("input/10.txt");
     std::cout << "10 part 1: " << day10::part1() << std::endl;
     day10::parse_input("input/10.txt");
     std::cout << "10 part 2: " << day10::part2() << std::endl;
-/*
+
     day11::parse_input("input/11_input");
     std::cout << "11 part 1: " << day11::part1() << std::endl;
     day11::parse_input("input/11_input");

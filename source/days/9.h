@@ -28,49 +28,35 @@ namespace day9 {
         return false;
     }
 
-    size_t part1_alternative_solution() {
-        size_t low = 0, high = 25 - 1;
-        for (size_t i = 25; i < numbers.size() + 0; i++, low++, high++) {
+    size_t part1() {
+        size_t low = 0, high = 24;
+        for (size_t i = 25; i <= numbers.size(); i++, low++, high++) {
             if (!find_number(numbers, low, high, numbers[i])) return numbers[i];
         }
         return -1;
     }
 
-    size_t part1() {
-        for (size_t i = 25; i < numbers.size(); i++) {
-            vector<size_t> prev25(numbers.begin() + (i - 25), numbers.begin() + i + 1);
-
-            bool found = false;
-            for (size_t it = 0; it < 25; it++) {
-                for (size_t j = it; j < 25; j++) {
-                    if (prev25.at(it) + prev25.at(j) == numbers.at(i)) {
-                        found = true;
-                    }
-                }
-            }
-            if (!found)
-                return numbers.at(i);
-        }
-        return -1;
-    }
-
     size_t part2() {
-        size_t number_to_find = 507622668; //eller part1() hvis du vil gjør det treigt.
-        vector<size_t> sums(numbers.size());
-        partial_sum(numbers.begin(), numbers.end(), sums.begin());
-        for (size_t i = 1; i < sums.size(); ++i) {
-            for (size_t j = 0; j < i; ++j) {
-                if (sums[i] - sums[j] == number_to_find) {
-                    const auto minmax = minmax_element(
-                            numbers.begin() + j, numbers.begin() + i
-                    );
-                    return *minmax.second + *minmax.first;
-                }
+        size_t target = 507622668; // eller part1();
+        auto left = 0;
+        auto right = 0;
+        auto sum = numbers.at(0);
+        do {
+            if (sum < target) {
+                right += 1;
+                sum += numbers.at(right);
+            } else if (sum > target) {
+                sum -= numbers.at(left);
+                left += 1;
+            } else {
+                const auto minmax = minmax_element(
+                        numbers.begin() + left, numbers.begin() + right
+                );
+                return *minmax.second + *minmax.first;
             }
-        }
-
-        return -1;
+        } while (true);
     }
+
 
 }
 

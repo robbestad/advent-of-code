@@ -7,9 +7,9 @@
 #include "source/days/8.h"
 #include "source/days/8_2.h"
 #include "source/days/9.h"
-#include "source/days/10.h"
 
 /*
+#include "source/days/10.h"
  #include "source/days/11.h"
 #include "source/days/12.h"
 #include "source/days/13.h"
@@ -86,27 +86,21 @@ static void BM_8_2(benchmark::State &state) {
     }
 }
 
-static void BM_9_1_1(benchmark::State &state) {
-    day9::parse_input("input/9_input");
+static void BM_9_1(benchmark::State &state) {
+    day9::parse_input("input/9.txt");
     for (auto _ : state) {
         benchmark::DoNotOptimize(day9::part1());
     }
 }
 
-static void BM_9_1_2(benchmark::State &state) {
-    day9::parse_input("input/9_input");
-    for (auto _ : state) {
-        benchmark::DoNotOptimize(day9::part1_alternative_solution());
-    }
-}
-
-static void BM_9_2(benchmark::State &state) {
-    day9::parse_input("input/9_input");
+static void BM_9_2_Kent(benchmark::State &state) {
+    day9::parse_input("input/9.txt");
     for (auto _ : state) {
         benchmark::DoNotOptimize(day9::part2());
     }
 }
 
+/*
 static void BM_10_1(benchmark::State &state) {
     day10::parse_input("input/10_input");
     for (auto _ : state) {
@@ -120,6 +114,7 @@ static void BM_10_2(benchmark::State &state) {
         benchmark::DoNotOptimize(day10::part2());
     }
 }
+*/
 
 //BENCHMARK(BM_4_1)->Unit(benchmark::kMicrosecond);
 //BENCHMARK(BM_4_2)->Unit(benchmark::kMicrosecond);
@@ -132,12 +127,14 @@ static void BM_10_2(benchmark::State &state) {
 //BENCHMARK(BM_8_1)->RangeMultiplier(2)->Range(1<<0, 1<<12)->Complexity()->Unit(benchmark::kMicrosecond);
 //BENCHMARK(BM_8_2)->Unit(benchmark::kMillisecond);
 
-BENCHMARK(BM_9_1_1)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_9_1_2)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_9_2)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_9_1_1)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_9_1_2)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_9_1)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_9_2_Kent)->Unit(benchmark::kMicrosecond);
+
+/*
 BENCHMARK(BM_10_1)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_10_2)->Unit(benchmark::kMicrosecond);
-/*
 BENCHMARK(BM_11_1)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_11_2)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_12_1)->Unit(benchmark::kMicrosecond);
