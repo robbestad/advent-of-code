@@ -1,0 +1,37 @@
+//
+// Created by Sven Anders Robbestad on 08/12/2020.
+//
+#include <span>
+#include <numeric>
+#include <unordered_set>
+#include "../include/utils.h"
+
+#ifndef AOC_23_H
+#define AOC_23_H
+using namespace std;
+namespace day23 {
+    vector<size_t> nums;
+    vector<string> strings;
+
+    void parse_input(const string &path) {
+        parse_input_by_line(path, [&](const auto &line) {
+            nums.emplace_back(stol(line));
+            strings.emplace_back(line);
+        });
+    };
+
+    size_t part1() {
+
+
+        return -1;
+    }
+
+    size_t part2() {
+       
+
+        return -1;
+    }
+
+}
+
+#endif //AOC_23_H
