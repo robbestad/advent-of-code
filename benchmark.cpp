@@ -7,9 +7,9 @@
 #include "source/days/8.h"
 #include "source/days/8_2.h"
 #include "source/days/9.h"
+#include "source/days/10.h"
 
 /*
-#include "source/days/10.h"
  #include "source/days/11.h"
 #include "source/days/12.h"
 #include "source/days/13.h"
@@ -104,17 +104,21 @@ static void BM_9_2_Kent(benchmark::State &state) {
     for (auto _ : state) {
         benchmark::DoNotOptimize(day9::part2());
     }
-
 }
 
-/*
-static void BM_10_1(benchmark::State &state) {
-    day10::parse_input("input/10_input");
+static void BM_10_2(benchmark::State &state) {
+    day10::parse_input("input/10.txt");
     for (auto _ : state) {
-        benchmark::DoNotOptimize(day10::part1());
+        benchmark::DoNotOptimize(day10::part2());
     }
 }
-
+static void BM_10_2_FAST(benchmark::State &state) {
+    day10::parse_input("input/10.txt");
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day10::part2fast());
+    }
+}
+/*
 static void BM_10_2(benchmark::State &state) {
     day10::parse_input("input/10_input");
     for (auto _ : state) {
@@ -139,10 +143,10 @@ static void BM_10_2(benchmark::State &state) {
 BENCHMARK(BM_9_1_fast)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_9_1_slow)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_9_2_Kent)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_10_2)->Unit(benchmark::kMicrosecond);
+BENCHMARK(BM_10_2_FAST)->Unit(benchmark::kMicrosecond);
 
 /*
-BENCHMARK(BM_10_1)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_10_2)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_11_1)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_11_2)->Unit(benchmark::kMicrosecond);
 BENCHMARK(BM_12_1)->Unit(benchmark::kMicrosecond);
