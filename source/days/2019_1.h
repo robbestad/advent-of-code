@@ -4,14 +4,14 @@
 #include <span>
 #include <numeric>
 #include <cmath>
-#include <unordered_set>
+#include <list>
+#include <unordered_map>
 #include "../include/utils.h"
 
 #ifndef AOC_2019_1_H
 #define AOC_2019_1_H
 using namespace std;
 namespace day2019_1 {
-
     vector<size_t> parse_input(const string &path) {
         vector<size_t> nums;
         parse_input_by_line(path, [&](const auto &line) {
@@ -26,6 +26,21 @@ namespace day2019_1 {
             fuel += floor(num / 3) - 2;
         }
         return fuel;
+    }
+
+    void calculate_fuel_memoized(size_t mass, vector<size_t> &sum,unordered_map<int,int>&memo) {
+        double fuel{0};
+        if (memo[mass])
+            fuel = memo[mass];
+        else {
+            fuel = floor(mass / 3) - 2;
+            memo.insert(pair(mass,fuel));
+            memo[mass] = fuel;
+        }
+        if (fuel <= 0)
+            return;
+        sum.emplace_back(fuel);
+        return calculate_fuel_memoized(fuel, sum,memo);
     }
 
     void calculate_fuel(size_t mass, vector<size_t> &sum) {
@@ -54,9 +69,10 @@ namespace day2019_1 {
     }
 
     size_t part2(const vector<size_t> &nums) {
+        unordered_map<int,int>memo;
         vector<size_t> sum;
         for (auto fuel:nums) {
-            calculate_fuel(fuel, sum);
+            calculate_fuel_memoized(fuel, sum,memo);
         }
         return accumulate(sum.begin(), sum.end(), (size_t) 0);
     }
