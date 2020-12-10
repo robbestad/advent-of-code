@@ -45,10 +45,6 @@ int main() {
     day8_2::parse_input("input/8_input.txt");
     std::cout << "8-2: " << day8_2::solve() << std::endl;
 
-    day2019_1::parse_input("input/2019_1.txt");
-    std::cout << "2019 part 1: " << day2019_1::part1() << std::endl;
-    day2019_1::parse_input("input/2019_1.txt");
-    std::cout << "2019 part 2: " << day2019_1::part2() << std::endl;
 
     day9::parse_input("input/9.txt");
     std::cout << "9 part 1: " << day9::part1fast() << std::endl;
@@ -58,9 +54,14 @@ int main() {
     day10::parse_input("input/10.txt");
     std::cout << "10 part 1: " << day10::part1() << std::endl;
 */
+    auto day2019input = day2019_1::parse_input("input/2019_1.txt");
+    std::cout << "2019 part 1: " << day2019_1::part1(day2019input) << std::endl;
+    std::cout << "2019 test: " << day2019_1::test() << std::endl;
+    std::cout << "2019 part 2: " << day2019_1::part2(day2019input) << std::endl;
 
-    day10::parse_input("input/10.txt");
-    std::cout << "10 part 2: " << day10::part2() << std::endl;
+    auto day10input = day10::parse_input("input/10.txt");
+    std::cout << "10 part 2 slow: " << day10::count(day10input) << std::endl;
+    std::cout << "10 part 2 fast: " << day10::part2fast(day10input) << std::endl;
 
 /*
      day11::parse_input("input/11_input");

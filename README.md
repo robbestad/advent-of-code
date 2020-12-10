@@ -1,4 +1,4 @@
-# aoc2020
-Advent of code 2020
+# advent of code solutions 
+Advent of code Solutions 
 
-I won't complete every day, but here's the code for the days I've worked on
+mostly written in c++
