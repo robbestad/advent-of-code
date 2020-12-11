@@ -10,26 +10,31 @@
 #define AOC_22_H
 using namespace std;
 namespace day22 {
-    vector<size_t> nums;
-    vector<string> strings;
+    using Clock = std::chrono::high_resolution_clock;
 
-    void parse_input(const string &path) {
-        parse_input_by_line(path, [&](const auto &line) {
-            nums.emplace_back(stol(line));
-            strings.emplace_back(line);
-        });
-    };
+    pair<size_t,size_t> part1(const vector<string>&input) {
+        auto t1 = Clock::now();
+        size_t result{0};
 
-    size_t part1() {
+        for(auto v:input){
 
+        }
 
-        return -1;
+        auto t2 = Clock::now();
+        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+        return {result,result_time};
     }
 
-    size_t part2() {
-       
+    pair<size_t,size_t> part2(const vector<string>&input) {
+        auto t1 = Clock::now();
+        size_t result{0};
+        for(auto v:input){
 
-        return -1;
+        }
+
+        auto t2 = Clock::now();
+        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+        return {result,result_time};
     }
 
 }
