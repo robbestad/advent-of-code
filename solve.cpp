@@ -9,6 +9,7 @@
 #include "source/2020/10.h"
 #include "source/2019/1.h"
 #include "source/2020/11.h"
+#include "source/2020/12.h"
 
 /*
 #include "source/2020/12.h"
@@ -63,20 +64,20 @@ int main() {
     std::cout << "10 part 2 slow: " << day10::count(day10input) << std::endl;
     std::cout << "10 part 2 fast: " << day10::part2fast(day10input) << std::endl;
 */
-    std::vector<std::string> day11input1 = utils::read_all_lines<std::string>("./input/11.txt");
-    std::vector<std::string> day11input2 = utils::read_all_lines<std::string>("./input/11.txt");
-    auto[result1, time_taken1] = day11::part1(day11input1);
-    std::cout << "11 part 1: " << result1 << " (" << time_taken1 << " ms)" << std::endl;
-    auto[result2, time_taken2] = day11::part2(day11input2);
-    std::cout << "11 part 2: " << result2 << " (" << time_taken2 << " ms)" << std::endl;
+    std::vector<std::string> day11input = utils::read_all_lines<std::string>("./input/11.txt");
+    auto[resultday11a, time_takenday11a] = day11::part1(day11input);
+    std::cout << "11 part 1: " << resultday11a << " (" << time_takenday11a << " ms)" << std::endl;
+    auto[resultday11b, time_takenday11b] = day11::part2(day11input);
+    std::cout << "11 part 2: " << resultday11b << " (" << time_takenday11b << " ms)" << std::endl;
+
+    std::vector<std::string> day12input = utils::read_all_lines<std::string>("./input/12.txt");
+    auto[resultday12a, time_takenday12a] = day11::part1(day12input);
+    std::cout << "12 part 1: " << resultday12a << " (" << time_takenday12a << " ms)" << std::endl;
+    auto[resultday12b, time_takenday12b] = day11::part2(day12input);
+    std::cout << "12 part 2: " << resultday12b << " (" << time_takenday12b << " ms)" << std::endl;
 
 
 /*
-     day11::parse_input("input/11_input");
-     std::cout << "11 part 1: " << day11::part1() << std::endl;
-     day11::parse_input("input/11_input");
-     std::cout << "11 part 2: " << day11::part2() << std::endl;
-
      day12::parse_input("input/12_input");
      std::cout << "12 part 1: " << day12::part1() << std::endl;
      day12::parse_input("input/12_input");
