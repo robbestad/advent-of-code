@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "../include/binaryToDecimal.h"
+#include "../../include/binaryToDecimal.h"
 using namespace std;
 
 namespace day5 {

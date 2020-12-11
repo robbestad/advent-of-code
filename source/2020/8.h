@@ -3,6 +3,7 @@
 //
 #include <regex>
 #include "../include/utils.h"
+#include "../include/parser.h"
 
 #ifndef AOC_8_H
 #define AOC_8_H

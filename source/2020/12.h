@@ -13,23 +13,28 @@ namespace day12 {
     vector<size_t> nums;
     vector<string> strings;
 
-    void parse_input(const string &path) {
+    vector<string> parse_input(const string &path) {
         parse_input_by_line(path, [&](const auto &line) {
             nums.emplace_back(stol(line));
             strings.emplace_back(line);
         });
+        return strings;
     };
 
-    size_t part1() {
+    size_t part1(const vector<string>&input) {
+        for(auto v:input){
 
+        }
 
-        return -1;
+        return 0;
     }
 
-    size_t part2() {
-       
+    size_t part2(const vector<string>&input) {
+        for(auto v:input){
 
-        return -1;
+        }
+
+        return 0;
     }
 
 }

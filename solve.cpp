@@ -1,30 +1,30 @@
 #include <iostream>
 
-#include "source/day_6/main.h"
-#include "source/days/7.h"
-#include "source/days/7_2.h"
-#include "source/days/8.h"
-#include "source/days/8_2.h"
-#include "source/days/9.h"
-#include "source/days/10.h"
-#include "source/days/2019_1.h"
+#include "source/2020/day_6/main.h"
+#include "source/2020/7.h"
+#include "source/2020/7_2.h"
+#include "source/2020/8.h"
+#include "source/2020/8_2.h"
+#include "source/2020/9.h"
+#include "source/2020/10.h"
+#include "source/2019/1.h"
+#include "source/2020/11.h"
 
 /*
-#include "source/days/11.h"
-#include "source/days/12.h"
-#include "source/days/13.h"
-#include "source/days/14.h"
-#include "source/days/15.h"
-#include "source/days/16.h"
-#include "source/days/17.h"
-#include "source/days/18.h"
-#include "source/days/19.h"
-#include "source/days/20.h"
-#include "source/days/21.h"
-#include "source/days/22.h"
-#include "source/days/23.h"
-#include "source/days/24.h"
-#include "source/days/25.h"
+#include "source/2020/12.h"
+#include "source/2020/13.h"
+#include "source/2020/14.h"
+#include "source/2020/15.h"
+#include "source/2020/16.h"
+#include "source/2020/17.h"
+#include "source/2020/18.h"
+#include "source/2020/19.h"
+#include "source/2020/20.h"
+#include "source/2020/21.h"
+#include "source/2020/22.h"
+#include "source/2020/23.h"
+#include "source/2020/24.h"
+#include "source/2020/25.h"
 */
 
 
@@ -53,7 +53,7 @@ int main() {
 
     day10::parse_input("input/10.txt");
     std::cout << "10 part 1: " << day10::part1() << std::endl;
-*/
+
     auto day2019input = day2019_1::parse_input("input/2019_1.txt");
     std::cout << "2019 part 1: " << day2019_1::part1(day2019input) << std::endl;
     std::cout << "2019 test: " << day2019_1::test() << std::endl;
@@ -62,6 +62,15 @@ int main() {
     auto day10input = day10::parse_input("input/10.txt");
     std::cout << "10 part 2 slow: " << day10::count(day10input) << std::endl;
     std::cout << "10 part 2 fast: " << day10::part2fast(day10input) << std::endl;
+*/
+    auto day11input1 = day11::parse_input("input/11t.txt");
+    //auto day11input2 = day11::parse_input("input/11.txt");
+
+    std::vector<std::string> day11input2 = utils::read_all_lines<std::string>("./input/11.txt");
+    //std::cout << "11 part 1 test  : " << day11::part1(day11input1) << std::endl;
+    //std::cout << "11 part 1 actual: " << day11::part1(day11input2) << std::endl;
+    std::cout << "11 part 2 test  : " << day11::part2(day11input1) << std::endl;
+    std::cout << "11 part 2 actual  : " << day11::part2(day11input2) << std::endl;
 
 /*
      day11::parse_input("input/11_input");

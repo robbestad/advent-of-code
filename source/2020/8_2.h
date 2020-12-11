@@ -1,6 +1,7 @@
 //
 // Created by Sven Anders Robbestad on 08/12/2020.
 //
+#include "../include/parser.h"
 
 #ifndef AOC_8_2_H
 #define AOC_8_2_H

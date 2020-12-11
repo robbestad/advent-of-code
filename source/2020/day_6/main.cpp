@@ -2,8 +2,8 @@
 #include <fstream>
 #include <vector>
 #include <set>
-#include "../include/split.h"
-#include "../include/parser.h"
+#include "../../include/split.h"
+#include "../../include/parser.h"
 
 using namespace std;
 

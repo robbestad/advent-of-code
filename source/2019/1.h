@@ -7,6 +7,7 @@
 #include <list>
 #include <unordered_map>
 #include "../include/utils.h"
+#include "../include/parser.h"
 
 #ifndef AOC_2019_1_H
 #define AOC_2019_1_H

@@ -1,31 +1,28 @@
 #include <benchmark/benchmark.h>
-#include "source/day_6/main.h"
-#include "source/day_5/main.h"
-#include "source/day_4/main.h"
-#include "source/days/7.h"
-#include "source/days/7_2.h"
-#include "source/days/8.h"
-#include "source/days/8_2.h"
-#include "source/days/9.h"
-#include "source/days/10.h"
-#include "source/days/2019_1.h"
+#include "source/2020/7.h"
+#include "source/2020/7_2.h"
+#include "source/2020/8.h"
+#include "source/2020/8_2.h"
+#include "source/2020/9.h"
+#include "source/2020/10.h"
+#include "source/2019/1.h"
+#include "source/2020/11.h"
 
 /*
- #include "source/days/11.h"
-#include "source/days/12.h"
-#include "source/days/13.h"
-#include "source/days/14.h"
-#include "source/days/15.h"
-#include "source/days/16.h"
-#include "source/days/17.h"
-#include "source/days/18.h"
-#include "source/days/19.h"
-#include "source/days/20.h"
-#include "source/days/21.h"
-#include "source/days/22.h"
-#include "source/days/23.h"
-#include "source/days/24.h"
-#include "source/days/25.h"
+#include "source/2020/12.h"
+#include "source/2020/13.h"
+#include "source/2020/14.h"
+#include "source/2020/15.h"
+#include "source/2020/16.h"
+#include "source/2020/17.h"
+#include "source/2020/18.h"
+#include "source/2020/19.h"
+#include "source/2020/20.h"
+#include "source/2020/21.h"
+#include "source/2020/22.h"
+#include "source/2020/23.h"
+#include "source/2020/24.h"
+#include "source/2020/25.h"
 
  */
 static void BM_2019_2(benchmark::State &state) {
@@ -34,35 +31,8 @@ static void BM_2019_2(benchmark::State &state) {
         benchmark::DoNotOptimize(day2019_1::part2(day2019input));
     }
 }
-static void BM_4_1(benchmark::State &state) {
-    for (auto _ : state) {
-        benchmark::DoNotOptimize(day4::part1());
-    }
-}
 
-static void BM_4_2(benchmark::State &state) {
-    for (auto _ : state) {
-        benchmark::DoNotOptimize(day4::part1());
-    }
-}
 
-static void BM_5(benchmark::State &state) {
-    for (auto _ : state) {
-        benchmark::DoNotOptimize(day5::solve());
-    }
-}
-
-static void BM_6_1(benchmark::State &state) {
-    for (auto _ : state) {
-        benchmark::DoNotOptimize(day6::part1());
-    }
-}
-
-static void BM_6_2(benchmark::State &state) {
-    for (auto _ : state) {
-        benchmark::DoNotOptimize(day6::part2());
-    }
-}
 
 static void BM_7_1(benchmark::State &state) {
     day7::parse_input("input/7_input.txt");
@@ -125,6 +95,19 @@ static void BM_10_2_FAST(benchmark::State &state) {
         benchmark::DoNotOptimize(day10::part2fast(input));
     }
 }
+
+static void BM_11_1(benchmark::State &state) {
+    auto input = day11::parse_input("input/11.txt");
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day11::part1(input));
+    }
+}
+static void BM_11_2(benchmark::State &state) {
+    auto input = day11::parse_input("input/11.txt");
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(day11::part2(input));
+    }
+}
 /*
 static void BM_10_2(benchmark::State &state) {
     day10::parse_input("input/10_input");
@@ -134,11 +117,6 @@ static void BM_10_2(benchmark::State &state) {
 }
 */
 
-//BENCHMARK(BM_4_1)->Unit(benchmark::kMicrosecond);
-//BENCHMARK(BM_4_2)->Unit(benchmark::kMicrosecond);
-//BENCHMARK(BM_5)->Unit(benchmark::kMicrosecond);
-//BENCHMARK(BM_6_1)->Unit(benchmark::kMicrosecond);
-//BENCHMARK(BM_6_2)->Unit(benchmark::kMicrosecond);
 //BENCHMARK(BM_7_1)->Unit(benchmark::kMillisecond);
 //BENCHMARK(BM_7_2)->Unit(benchmark::kMillisecond);
 //BENCHMARK(BM_8_1)->Unit(benchmark::kMicrosecond);
@@ -147,12 +125,15 @@ static void BM_10_2(benchmark::State &state) {
 
 //BENCHMARK(BM_9_1_1)->Unit(benchmark::kMicrosecond);
 //BENCHMARK(BM_9_1_2)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_9_1_fast)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_9_1_slow)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_9_2_Kent)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_10_2)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_10_2_FAST)->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_2019_2)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_9_1_fast)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_9_1_slow)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_9_2_Kent)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_10_2)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_10_2_FAST)->Unit(benchmark::kMicrosecond);
+//BENCHMARK(BM_2019_2)->Unit(benchmark::kMicrosecond);
+
+BENCHMARK(BM_11_1)->Unit(benchmark::kMillisecond);
+BENCHMARK(BM_11_2)->Unit(benchmark::kMillisecond);
 
 /*
 BENCHMARK(BM_11_1)->Unit(benchmark::kMicrosecond);

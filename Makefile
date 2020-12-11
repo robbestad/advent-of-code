@@ -1,6 +1,6 @@
 CFLAGS=-std=c++2a
 
-SOLUTION_HEADERS=source/day_6/main.h source/day_5/main.h source/day_4/main.h source/days/7.h
+SOLUTION_HEADERS=source/include/parser.h source/include/utils.h
 
 all: bench run
 solve: solve.cpp source/include/parser.h source/include/split.h $(SOLUTION_HEADERS)
