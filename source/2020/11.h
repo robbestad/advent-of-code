@@ -5,6 +5,9 @@
 #include <numeric>
 #include <unordered_set>
 #include "../include/utils.h"
+#include <chrono>
+
+using Clock = std::chrono::high_resolution_clock;
 
 #ifndef AOC_11_H
 #define AOC_11_H
@@ -18,16 +21,6 @@ namespace day11 {
         OCCUPIED
     };
 
-    vector<pair<int, int>> directions = {
-            {1,  0},
-            {1,  1},
-            {0,  1},
-            {-1, 1},
-            {-1, 0},
-            {-1, -1},
-            {0,  -1},
-            {1,  -1}
-    };
 
     std::ostream &operator<<(std::ostream &out, const Seat value) {
         if (value == Seat::FREE) return out << 'L';
@@ -84,7 +77,7 @@ namespace day11 {
 
 
     int seat_visible(const vector<vector<Seat>> &seats, int vertical_pos, int horizontal_pos,
-                    const int vertical_delta, const int horizontal_delta)  {
+                     const int vertical_delta, const int horizontal_delta) {
         vertical_pos += vertical_delta;
         horizontal_pos += horizontal_delta;
         while (vertical_pos >= 0 && vertical_pos < seats.size() &&
@@ -96,7 +89,8 @@ namespace day11 {
         }
         return 0;
     }
-    int count_adjacent_3(const vector<vector<Seat>> &seats, int row, int col)  {
+
+    int count_adjacent_3(const vector<vector<Seat>> &seats, int row, int col) {
         return seat_visible(seats, row, col, -1, -1) +
                seat_visible(seats, row, col, -1, 0) +
                seat_visible(seats, row, col, -1, 1) +
@@ -110,26 +104,30 @@ namespace day11 {
 
     int count_adjacent_2(const vector<vector<Seat>> &seats, int row, int col) {
         size_t count = 0;
+        static const vector<pair<int, int>> dirs = {
+                {1,  0},
+                {1,  1},
+                {0,  1},
+                {-1, 1},
+                {-1, 0},
+                {-1, -1},
+                {0,  -1},
+                {1,  -1}
+        };
 
-        for (int direction = 0; direction < 8; direction++) {
-            int dx = 0;
-            int dy = 0;
-            do {
-                dx += directions[direction].first;
-                dy += directions[direction].second;
-            } while (row + dx >= 0
-                     && row + dx < seats.size()
-                     && col + dy >= 0
-                     && col + dy < seats[row + dx].size()
-                     && seats[row + dx][col + dy] == Seat::NONE);
-
-            if (row + dx >= 0
-                && row + dx < seats.size()
-                && col + dy >= 0
-                && col + dy < seats[row + dx].size()
-                && seats[row + dx][col + dy] == Seat::OCCUPIED)
-                count++;
-
+        for (const auto &[dx, dy] : dirs) {
+            int x = row + dx;
+            int y = col + dy;
+            while (x >= 0 && x < seats.size() && y >= 0 && y < seats.front().size()) {
+                if (seats[x][y] == Seat::OCCUPIED) {
+                    count++;
+                    break;
+                } else if (seats[x][y] == Seat::FREE) {
+                    break;
+                }
+                x += dx;
+                y += dy;
+            }
         }
         return count;
     }
@@ -166,7 +164,8 @@ namespace day11 {
         return count;
     }
 
-    size_t part1(const vector<string> &input) {
+    pair<size_t,size_t> part1(const vector<string> &input) {
+        auto t1 = Clock::now();
         vector<vector<Seat>> seats = to_seats(input);
         int count = 0;
         int maxTaken = 4;
@@ -200,10 +199,13 @@ namespace day11 {
                 if (seat == Seat::OCCUPIED) { occupied_rows++; }
             }
         }
-        return occupied_rows;
+        auto t2 = Clock::now();
+        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+        return {occupied_rows,result_time};
     }
 
-    size_t part2(const vector<string> &input) {
+    pair<size_t,size_t> part2(const vector<string> &input) {
+        auto t1 = Clock::now();
         vector<vector<Seat>> seats = to_seats(input);
         int count = 0;
         int max_occupied = 5;
@@ -212,7 +214,7 @@ namespace day11 {
 
         bool changed = true;
         while (changed) {
-            auto[new_seats, has_changed] = FindSeats(seats, max_occupied, count_adjacent_3);
+            auto[new_seats, has_changed] = FindSeats(seats, max_occupied, count_adjacent_2);
             seats = move(new_seats);
             changed = has_changed;
             moves.emplace(pair(++count, seats));
@@ -238,7 +240,10 @@ namespace day11 {
                 if (seat == Seat::OCCUPIED) { occupied_rows++; }
             }
         }
-        return occupied_rows;
+
+        auto t2 = Clock::now();
+        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+        return {occupied_rows,result_time};
     }
 
 }

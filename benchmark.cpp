@@ -96,14 +96,15 @@ static void BM_10_2_FAST(benchmark::State &state) {
     }
 }
 
+
 static void BM_11_1(benchmark::State &state) {
-    auto input = day11::parse_input("input/11.txt");
+    std::vector<std::string> input = utils::read_all_lines<std::string>("./input/11.txt");
     for (auto _ : state) {
         benchmark::DoNotOptimize(day11::part1(input));
     }
 }
 static void BM_11_2(benchmark::State &state) {
-    auto input = day11::parse_input("input/11.txt");
+    std::vector<std::string> input = utils::read_all_lines<std::string>("./input/11.txt");
     for (auto _ : state) {
         benchmark::DoNotOptimize(day11::part2(input));
     }

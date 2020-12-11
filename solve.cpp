@@ -63,14 +63,13 @@ int main() {
     std::cout << "10 part 2 slow: " << day10::count(day10input) << std::endl;
     std::cout << "10 part 2 fast: " << day10::part2fast(day10input) << std::endl;
 */
-    auto day11input1 = day11::parse_input("input/11t.txt");
-    //auto day11input2 = day11::parse_input("input/11.txt");
-
+    std::vector<std::string> day11input1 = utils::read_all_lines<std::string>("./input/11.txt");
     std::vector<std::string> day11input2 = utils::read_all_lines<std::string>("./input/11.txt");
-    //std::cout << "11 part 1 test  : " << day11::part1(day11input1) << std::endl;
-    //std::cout << "11 part 1 actual: " << day11::part1(day11input2) << std::endl;
-    std::cout << "11 part 2 test  : " << day11::part2(day11input1) << std::endl;
-    std::cout << "11 part 2 actual  : " << day11::part2(day11input2) << std::endl;
+    auto[result1, time_taken1] = day11::part1(day11input1);
+    std::cout << "11 part 1: " << result1 << " (" << time_taken1 << " ms)" << std::endl;
+    auto[result2, time_taken2] = day11::part2(day11input2);
+    std::cout << "11 part 2: " << result2 << " (" << time_taken2 << " ms)" << std::endl;
+
 
 /*
      day11::parse_input("input/11_input");
