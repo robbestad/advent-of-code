@@ -1,7 +1,7 @@
 //
 // Created by Sven Anders Robbestad on 08/12/2020.
 //
-#include <span>
+
 #include <numeric>
 #include <cmath>
 #include <list>

@@ -12,14 +12,15 @@
 using namespace std;
 
 namespace day7b {
-    struct bag {
+    struct Bag {
+        Bag():nbs(0){}
         int nbs;
         std::string bagColor;
     };
 
-    int num_bags(const bag& key);
+    int num_bags(const Bag& key);
 
-    std::map<std::string, std::vector<bag>> m_Tree2;
+    std::map<std::string, std::vector<Bag>> m_Tree2;
     struct tree {
         string value;
         std::vector<tree> children;
@@ -31,7 +32,7 @@ namespace day7b {
             split(line, ' ', bags);
 
             for (int i = 4; i < bags.size(); i = i + 4) {
-                bag bag;
+                Bag bag;
                 bag.bagColor = bags[i + 1] + " " + bags[i + 2];
                 bag.nbs = atoi(bags[i].c_str());
                 m_Tree2[bags[0] + ' ' + bags[1]].push_back(bag);
@@ -40,7 +41,7 @@ namespace day7b {
         });
     }
 
-    int num_bags(const bag& key) {
+    int num_bags(const Bag& key) {
         int nb = 0;
         for (const auto& it : m_Tree2[key.bagColor]) {
             if (it.bagColor == "other bags.")
