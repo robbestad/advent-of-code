@@ -8,3 +8,4 @@ ignore
 .vscode
 cmake-build-debug
 *.py
+node_modules
