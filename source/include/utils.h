@@ -1,7 +1,9 @@
 //
 // Created by Sven Anders Robbestad on 08/12/2020.
 //
-
+#include <fstream>
+#include <string>
+#include <vector>
 #ifndef AOC_UTILS_H
 #define AOC_UTILS_H
 
@@ -62,8 +64,8 @@ namespace utils {
         return res;
     }
 
-    string unicode_to_utf8(int unicode) {
-        string s;
+    std::string unicode_to_utf8(int unicode) {
+        std::string s;
 
         if (unicode >= 0 and unicode <= 0x7f)  // 7F(16) = 127(10)
         {
