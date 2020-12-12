@@ -8,10 +8,10 @@
 #include <type_traits>
 #include "../include/utils.h"
 
-#ifndef AOC_12_H
-#define AOC_12_H
+#ifndef AOC_12_2_H
+#define AOC_12_2_H
 using namespace std;
-namespace day12 {
+namespace day12_2 {
     template<typename E>
     constexpr auto to_underlying(E e) noexcept {
         return static_cast<std::underlying_type_t<E>>(e);
@@ -20,7 +20,7 @@ namespace day12 {
     using Clock = std::chrono::high_resolution_clock;
 
     enum dir {
-        NORTH = (int) 1, EAST = (int) 2, SOUTH = (int) 3, WEST = (int) 4
+        NORTH = 1, EAST = 2, SOUTH = 3, WEST = 4
     };
 
     std::ostream &operator<<(std::ostream &out, const dir value) {
@@ -63,22 +63,30 @@ namespace day12 {
         }
     }
 
-    void turn_right(std::unordered_map<dir, int, std::hash<int> > &pos, dir &facing, int degrees) {
-        auto start = to_underlying(facing);
-        if (start == 4) start = 0;
-        auto turn = start + degrees;
-        facing = dir(turn);
+    void turn_right(std::unordered_map<dir, int, std::hash<int> > &pos) {
+        auto n = pos[dir::NORTH];
+        auto w = pos[dir::WEST];
+        auto s = pos[dir::SOUTH];
+        auto e = pos[dir::EAST];
+        pos[dir::NORTH] = w;
+        pos[dir::EAST] = n;
+        pos[dir::SOUTH] = e;
+        pos[dir::WEST] = s;
+
     }
 
-    void turn_left(std::unordered_map<dir, int, std::hash<int> > &pos, dir &facing, int degrees) {
-        int start = (int) to_underlying(facing);
-        if (start == 0) start = 4;
-        auto turn = start - degrees;
-        if (turn == 0) turn = 4;
-        facing = dir(turn);
+    void turn_left(std::unordered_map<dir, int, std::hash<int> > &pos) {
+        auto n = pos[dir::NORTH];
+        auto w = pos[dir::WEST];
+        auto s = pos[dir::SOUTH];
+        auto e = pos[dir::EAST];
+        pos[dir::NORTH] = e;
+        pos[dir::EAST] = s;
+        pos[dir::SOUTH] = w;
+        pos[dir::WEST] = n;
     }
 
-    pair<size_t, size_t> part1(const vector<string> &input) {
+    pair<size_t, size_t> part2(const vector<string> &input) {
         auto t1 = Clock::now();
         size_t result{0};
 
@@ -89,53 +97,53 @@ namespace day12 {
                 {dir::WEST,  0}
         };
 
+        std::unordered_map<dir, int, std::hash<int> > waypoint{
+                {dir::NORTH, 1},
+                {dir::EAST,  10},
+                {dir::SOUTH, 0},
+                {dir::WEST,  0}
+        };
+
         auto facing = dir::EAST;
 
         for (auto v:input) {
             int val = stoi(utils::tail(v, v.size() - 1));
             if (v[0] == 'F') {
-                if (facing == dir::NORTH) {
-                    go_north(pos, val);
-                }
-                if (facing == dir::SOUTH) {
-                    go_south(pos, val);
-                }
-                if (facing == dir::WEST) {
-                    go_west(pos, val);
-                }
-                if (facing == dir::EAST) {
-                    go_east(pos, val);
+                for (int i = val; i > 0; i--) {
+                    go_north(pos, waypoint[dir::NORTH]);
+                    go_south(pos, waypoint[dir::SOUTH]);
+                    go_east(pos, waypoint[dir::EAST]);
+                    go_west(pos, waypoint[dir::WEST]);
                 }
             }
             if (v[0] == 'N') {
-                go_north(pos, val);
+                go_north(waypoint, val);
             }
             if (v[0] == 'S') {
-                go_south(pos, val);
+                go_south(waypoint, val);
             }
             if (v[0] == 'W') {
-                go_west(pos, val);
+                go_west(waypoint, val);
             }
             if (v[0] == 'E') {
-                go_east(pos, val);
+                go_east(waypoint, val);
             }
 
             if (v[0] == 'R') {
                 size_t degrees = val / 90;
                 for (int i = 1; i <= degrees; degrees--)
-                    turn_right(pos, facing, i);
+                    turn_right(waypoint);
 
             }
             if (v[0] == 'L') {
                 size_t degrees = val / 90;
                 for (int i = 1; i <= degrees; degrees--)
-                    turn_left(pos, facing, i);
+                    turn_left(waypoint);
             }
-            // cout << "N:" << pos[dir::NORTH] << " E:" << pos[dir::EAST] << " S:" << pos[dir::SOUTH] << " W:"
-            //    << pos[dir::WEST] << endl;
+
+
         }
         for (auto p:pos) {
-           // cout << p.first << ":" << p.second << endl;
             result += p.second;
         }
 
@@ -147,4 +155,4 @@ namespace day12 {
 
 }
 
-#endif //AOC_12_H
+#endif //AOC_12_2_H
