@@ -1,6 +1,7 @@
 out/
 a.out
-*.sh
+getinput.sh
+build/
 bin/*
 ignore
 *.gch

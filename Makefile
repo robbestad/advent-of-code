@@ -12,7 +12,8 @@ benchmark: benchmark.cpp source/include/parser.h source/include/split.h source/i
 bench: benchmark
 	./bin/benchmark
 
-	./bin/solve
+run:
+	sh ./build.sh
 
 clean:
 	rm -f solve benchmark
