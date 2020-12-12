@@ -143,13 +143,12 @@ namespace day12_2 {
 
 
         }
-        for (auto p:pos) {
-            result += p.second;
-        }
+
+        int distance =  abs(pos[dir::EAST] - pos[dir::WEST]) + abs (pos[dir::NORTH]-pos[dir::SOUTH]);
 
         auto t2 = Clock::now();
         size_t result_time = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
-        return {result, result_time};
+        return {distance, result_time};
     }
 
 
