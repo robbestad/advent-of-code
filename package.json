@@ -1,0 +1,23 @@
+{
+  "name": "aoc2020n",
+  "version": "1.0.0",
+  "description": "Advent of code Solutions",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svenanders/aoc2020.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svenanders/aoc2020/issues"
+  },
+  "homepage": "https://github.com/svenanders/aoc2020#readme",
+  "dependencies": {
+    "gulp": "^4.0.2"
+  }
+}
