@@ -81,7 +81,6 @@ namespace day12 {
 
     pair<size_t, size_t> part1(const vector<string> &input) {
         auto t1 = Clock::now();
-        size_t result{0};
 
         std::unordered_map<dir, int, std::hash<int> > pos{
                 {dir::NORTH, 0},
