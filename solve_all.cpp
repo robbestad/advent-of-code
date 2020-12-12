@@ -76,6 +76,7 @@ int main() {
     auto[resultday12b, time_takenday12b] = day12_2::part2(day12input);
     std::cout << "12 part 2: " << resultday12b << " (" << time_takenday12b << "us)" << std::endl;
 
+
 /*
      day12::parse_input("input/12_input");
      std::cout << "12 part 1: " << day12::part1() << std::endl;

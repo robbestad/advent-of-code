@@ -3,9 +3,13 @@
 //
 
 #include <numeric>
+#include <functional>
+#include <chrono>
 #include <unordered_set>
+#include <unordered_map>
+#include <cmath>
+#include <type_traits>
 #include "../include/utils.h"
-
 #ifndef AOC_13_H
 #define AOC_13_H
 using namespace std;
@@ -17,7 +21,6 @@ namespace day13 {
         size_t result{0};
 
         for(auto v:input){
-
         }
 
         auto t2 = Clock::now();
