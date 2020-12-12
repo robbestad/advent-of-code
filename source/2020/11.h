@@ -4,8 +4,11 @@
 
 #include <numeric>
 #include <unordered_set>
-#include "../include/utils.h"
+#include <map>
 #include <chrono>
+#include <functional>
+#include "../include/utils.h"
+#include "../include/parser.h"
 
 using Clock = std::chrono::high_resolution_clock;
 
@@ -54,7 +57,7 @@ namespace day11 {
     pair<vector<vector<Seat>>, bool> FindSeats(
             const vector<vector<Seat>> &seats,
             int maxTaken,
-            const function<int(const vector<vector<Seat>> &,
+            const  std::function<int(const vector<vector<Seat>> &,
                                int, int)> &countMethod) {
         vector<vector<Seat>> newSeats = seats;
         bool changed = false;
