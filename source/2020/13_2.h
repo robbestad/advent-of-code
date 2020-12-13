@@ -19,7 +19,7 @@
 using namespace std;
 
 
-namespace day13_2 {
+namespace day13 {
     using Clock = std::chrono::high_resolution_clock;
 
     struct bus {
@@ -33,13 +33,13 @@ namespace day13_2 {
 
 
     int64_t mul_inv(int64_t a, int64_t b) {
-        int64_t b0= b;
+        int64_t b0 = b;
         int64_t t, q;
         int64_t x0 = 0, x1 = 1;
         if (b == 1) return 1;
         while (a > 1) {
             q = a / b;
-            t = b, b = a % b,a = t,t = x0;
+            t = b, b = a % b, a = t, t = x0;
             x0 = x1 - q * x0;
             x1 = t;
         }
@@ -77,8 +77,7 @@ namespace day13_2 {
         //return (sum > 0 ? sum : (-sum + prod)) % prod;
     }
 
-    pair<size_t, size_t> part2(const vector<string> &input) {
-        size_t result{0};
+    void part2(const string &label, const vector<string> &input) {
         auto times = utils::split(input[1], ",");
         unordered_map<int, int> schedules;
         vector<int> schedule;
@@ -105,24 +104,27 @@ namespace day13_2 {
         auto t_1 = Clock::now();
         auto sum = crt(bus_values);
         auto t_2 = Clock::now();
-        cout << endl << "13 part 2 (crt): " << sum << " ("
-             << std::chrono::duration_cast<std::chrono::nanoseconds>(t_2 - t_1).count() << "ns)" << endl;
+        cout << label
+             << " (crt): "
+             << sum << " ("
+             << std::chrono::duration_cast<std::chrono::nanoseconds>(t_2 - t_1).count()
+             << "ns)"
+             << endl;
 
         auto t1 = Clock::now();
         unsigned long long timestep{100000000000000};//hint fra adventofcode
         unsigned long long step{1};
         for (const auto &[k, v]:schedules) {
-            while ((timestep + v) % k != 0) {
+            while ((timestep + v) % k != 0)
                 timestep += step;
-            }
             step *= k;
         }
-        result = timestep;
         auto t2 = Clock::now();
-        size_t result_time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
-        return {result, result_time};
+        cout << label << " (sieve): "
+             << timestep << " ("
+             << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() << "ns)"
+             << endl;
     }
-
 }
 
 #endif //AOC_13_2_H
