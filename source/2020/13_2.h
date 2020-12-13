@@ -13,7 +13,6 @@
 #include <iostream>
 #include <numeric>
 #include <vector>
-#include <execution>
 
 #ifndef AOC_13_2_H
 #define AOC_13_2_H
