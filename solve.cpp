@@ -4,6 +4,7 @@
 #include "source/2020/12.h"
 #include "source/2020/12_2.h"
 #include "source/2020/13.h"
+#include "source/2020/13_2.h"
 
 int main() {
 
@@ -16,4 +17,7 @@ int main() {
     std::vector<std::string> day13input = utils::read_all_lines<std::string>("./input/13.txt");
     auto[resultday13A, time_takenday13a] = day13::part1(day13input);
     std::cout << "13 part 1: " << resultday13A << " (" << time_takenday13a << "us)" << std::endl;
+    auto[resultday13B, time_takenday13b] = day13_2::part2(day13input);
+    std::cout << "13 part 2: " << resultday13B << " (" << time_takenday13b << "us)" << std::endl;
+
 }

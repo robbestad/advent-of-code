@@ -44,37 +44,26 @@ namespace day13 {
         auto lowest{INT_MAX};
         auto the_bus{0};
         for (const auto &s:expanded_schedulemap) {
-            cout << s.first << ": ";
+            //cout << s.first << ": ";
             for (const auto &t:s.second) {
                 distance = t - departure_time;
                 if (distance > 0) {
                     if (distance < lowest) {
                         lowest = distance;
                         the_bus = s.first;
-                        cout << distance << " ";
+                        //cout << distance << " ";
                     }
                 }
             }
-            cout << endl;
+            //cout << endl;
         }
         result = lowest * the_bus;
-        
-        auto t2 = Clock::now();
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-        return {result, result_time};
-    }
-
-    pair<size_t, size_t> part2(const vector<string> &input) {
-        auto t1 = Clock::now();
-        size_t result{0};
-        for (auto v:input) {
-
-        }
 
         auto t2 = Clock::now();
         size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
         return {result, result_time};
     }
+
 
 }
 
