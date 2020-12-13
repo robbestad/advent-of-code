@@ -60,7 +60,7 @@ namespace day13 {
         result = lowest * the_bus;
 
         auto t2 = Clock::now();
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+        size_t result_time = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
         return {result, result_time};
     }
 

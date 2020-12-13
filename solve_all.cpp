@@ -76,6 +76,12 @@ int main() {
     auto[resultday12b, time_takenday12b] = day12_2::part2(day12input);
     std::cout << "12 part 2: " << resultday12b << " (" << time_takenday12b << "us)" << std::endl;
 
+    std::vector<std::string> day13input = utils::read_all_lines<std::string>("./input/13.txt");
+    auto[resultday13A, time_takenday13a] = day13::part1(day13input);
+    std::cout << "13 part 1: " << resultday13A << " (" << time_takenday13a << "us)" << std::endl;
+    auto[resultday13B, time_takenday13b] = day13_2::part2(day13input);
+    std::cout << "13 part 2: " << resultday13B << " (" << time_takenday13b << "us)" << std::endl;
+
 /*
      day12::parse_input("input/12_input");
      std::cout << "12 part 1: " << day12::part1() << std::endl;
