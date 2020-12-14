@@ -19,7 +19,7 @@ int binaryToDecimal(int n) {
     }
     return dec_value;
 }
-unsigned long long binaryToDecimal(unsigned long long n) {
+long binaryToDecimal(long n) {
     auto num = n;
     auto dec_value = 0;
     // Initializing base value to 1, i.e 2^0

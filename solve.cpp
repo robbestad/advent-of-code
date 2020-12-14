@@ -14,9 +14,7 @@ int main() {
     day13::part1("13 part 1", day13input);
     day13::part2("13 part 2", day13input);
 
-    std::vector<std::string> day4_input = utils::read_all_lines<std::string>("./input/14.txt");
-    std::vector<std::string> day4_test_input = utils::read_all_lines<std::string>("./input/14t.txt");
-    //day14::part1("14 part 1", day4_input);
-    day14::part1("14 part 1 test", day4_test_input);
+    day14::part1("14 part 1", "input/14.txt");
+    day14::part1("14 part 1 test", "input/14.txt");
 
 }
