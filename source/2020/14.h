@@ -19,6 +19,23 @@ namespace day14 {
     using Clock = std::chrono::high_resolution_clock;
 
     ull apply_mask(ull number, std::string mask) {
+        auto dec = utils::toBinary(number);
+        string rdec(dec.rbegin(), dec.rend());
+        string rev_mask(mask.rbegin(), mask.rend());
+        for (int n = 0; n < dec.length(); n++) {
+            if (rev_mask[n] == 0) {
+                rev_mask[n] = 0;
+            } else if (rev_mask[n] == 'X') {
+                auto num = rdec[n];
+                rev_mask[n] = num;
+            }
+        }
+        string temp_mask(rev_mask.rbegin(), rev_mask.rend());
+        auto res_mask = regex_replace(temp_mask, (regex) "X", "0");
+        return std::bitset<64>(res_mask).to_ullong();
+    }
+
+    ull apply_mask_bitshift(ull number, std::string mask) {
         ull zeros_mask = (1ULL << 37) - 1;
         ull ones_mask{};
         for (int i{}; i < mask.size(); ++i)
@@ -27,6 +44,7 @@ namespace day14 {
 
         return (number | ones_mask) & zeros_mask;
     }
+
 
     void part1(const string &label, const string &path) {
         auto t_read = Clock::now();
