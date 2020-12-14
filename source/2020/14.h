@@ -13,9 +13,9 @@
 
 #ifndef AOC_14_H
 #define AOC_14_H
-using ull = unsigned long long;
 
 namespace day14 {
+using ull = unsigned long long;
     using Clock = std::chrono::high_resolution_clock;
 
     ull apply_mask(ull number, std::string mask) {

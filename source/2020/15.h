@@ -12,31 +12,41 @@ using namespace std;
 namespace day15 {
     using Clock = std::chrono::high_resolution_clock;
 
-    void part1(const string &label, const vector<string> &input) {
-        auto t1 = Clock::now();
+    void part1(const string &label, const string &path) {
+        auto t_read = Clock::now();
+        std::string input;
+        std::fstream f{path};
         size_t result{0};
+        std::map<ull, ull> memory, memory2;
 
-        for (auto v:input) {
+        while (f >> input) {
 
         }
 
-        auto t2 = Clock::now();
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+        auto t1 = Clock::now();
+
+        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
         cout << label << ": "
              << result << " ("
              << result_time << ")"
              << endl;
     }
 
-    void part2(const string &label, const vector<string> &input) {
+    void part2(const string &label, const string &path) {
         auto t1 = Clock::now();
         size_t result{0};
-        for (auto v:input) {
+        std::string input;
+        std::fstream f{path};
+        std::map<ull, ull> memory, memory2;
+
+        while (f >> input) {
 
         }
 
-        auto t2 = Clock::now();
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+        t1 = Clock::now();
+
+
+        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
         cout << label << ": "
              << result << " ("
              << result_time << ")"

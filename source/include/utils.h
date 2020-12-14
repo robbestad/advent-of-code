@@ -126,11 +126,37 @@ namespace utils {
         return "";
     }
 
-    std::string toBinary(long n)
-    {
+    template<typename E>
+     std::string toBinary(E e) noexcept {
         std::string r;
-        while(n!=0) {r=(n%2==0 ?"0":"1")+r; n/=2;}
+        while(e!=0) {r=(e%2==0 ?"0":"1")+r; e/=2;}
         return r;
+    }
+
+    template <typename T>
+    T reverse(T n, size_t b = sizeof(T) * std::numeric_limits<T>::digits)
+    {
+        T rv = 0;
+        for (size_t i = 0; i < b; ++i, n >>= 1) {
+            rv = (rv << 1) | (n & 0x01);
+        }
+        return rv;
+    }
+
+    template <typename T>
+    long bin_to_dec(T n) {
+        T num = n;
+        auto dec_value = 0;
+        // Initializing base value to 1, i.e 2^0
+        auto base = 1;
+        auto temp = num;
+        while (temp) {
+            auto last_digit = temp % 10;
+            temp = temp / 10;
+            dec_value += last_digit * base;
+            base = base * 2;
+        }
+        return dec_value;
     }
 }
 #endif //AOC_UTILS_H
