@@ -19,4 +19,18 @@ int binaryToDecimal(int n) {
     }
     return dec_value;
 }
+unsigned long long binaryToDecimal(unsigned long long n) {
+    auto num = n;
+    auto dec_value = 0;
+    // Initializing base value to 1, i.e 2^0
+    auto base = 1;
+    auto temp = num;
+    while (temp) {
+        auto last_digit = temp % 10;
+        temp = temp / 10;
+        dec_value += last_digit * base;
+        base = base * 2;
+    }
+    return dec_value;
+}
 #endif //AOC_BINARYTODECIMAL_H

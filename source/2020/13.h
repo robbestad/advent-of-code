@@ -17,18 +17,40 @@ using namespace std;
 namespace day13 {
     using Clock = std::chrono::high_resolution_clock;
 
-    void part1(const string& label, const vector<string> &input) {
+    struct bus {
+        int idx = 0;
+        int id = 0;
+
+        bus() = default;
+
+        bus(int index, int bus_id) : idx{index}, id{bus_id} {}
+    };
+
+    struct schedule_structure {
+        int current_time = 0;
+        std::vector<bus> bus_ids;
+    };
+
+    void part1(const string &label, const vector<string> &input) {
         auto t1 = Clock::now();
         size_t result{0};
         auto departure_time = stol(input[0]);
         auto times = utils::split(input[1], ",");
         unordered_map<int, vector<int>> schedulemap;
-        vector<int> schedule;
+        vector<bus> schedule;
+        int i{0};
         for (const auto &v:times) {
             if (v != "x") {
                 schedulemap.emplace(pair(stoi(v), 0));
+                bus b;
+                b.idx = i++,
+                b.id = stoi(v);
+                schedule.emplace_back(b);
             }
         }
+        schedule_structure s;
+        s.current_time = 0;
+        s.bus_ids = std::move(schedule);
 
         unordered_map<int, vector<int>> expanded_schedulemap;
         for (const auto &s:schedulemap) {
@@ -63,6 +85,20 @@ namespace day13 {
 
         cout << label << ": " << result << " ("
              << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() << "ns)" << endl;
+
+
+        t1 = Clock::now();
+        std::vector<int> wait;
+        wait.reserve(s.bus_ids.size());
+        std::transform(s.bus_ids.begin(), s.bus_ids.end(), std::back_inserter(wait),
+                       [t = s.current_time](bus b) { return b.id - (t % b.id); });
+        auto min_wait = std::min_element(wait.begin(), wait.end());
+        auto idx = std::distance(wait.begin(), min_wait);
+        cout << label << ": "
+             << *min_wait * s.bus_ids[idx].id
+             << " ("
+             << std::chrono::duration_cast<std::chrono::nanoseconds>(Clock::now() - t1).count() << "ns)" << endl;
+
     }
 
 

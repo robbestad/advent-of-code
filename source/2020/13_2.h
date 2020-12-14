@@ -21,16 +21,14 @@ using namespace std;
 
 namespace day13 {
     using Clock = std::chrono::high_resolution_clock;
-
-    struct bus {
+    struct bus2 {
         int pos = 0;
         int value = 0;
 
-        bus() = default;
+        bus2() = default;
 
-        bus(int index, int bus_value) : pos{index}, value{bus_value} {}
+        bus2(int index, int bus_value) : pos{index}, value{bus_value} {}
     };
-
 
     int64_t mul_inv(int64_t a, int64_t b) {
         int64_t b0 = b;
@@ -62,7 +60,7 @@ namespace day13 {
         return s.first;
     }
 
-    int64_t crt(const std::vector<bus> &buses) {
+    int64_t crt(const std::vector<bus2> &buses) {
         int64_t prod{1};
         for (auto b:buses) {
             prod *= b.value;
@@ -91,10 +89,10 @@ namespace day13 {
             schedules.emplace(pair(stoi(v), pos++));
         }
 
-        std::vector<bus> bus_values;
+        std::vector<bus2> bus_values;
         bus_values.reserve(schedules.size() + 1);
         for (const auto &[k, v]:schedules) {
-            bus b;
+            bus2 b;
             b.value = k;
             b.pos = v;
             bus_values.emplace_back(b);
