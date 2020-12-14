@@ -126,10 +126,10 @@ namespace utils {
         return "";
     }
 
-    std::string toBinary(long n)
-    {
+    template<typename E>
+     std::string toBinary(E e) noexcept {
         std::string r;
-        while(n!=0) {r=(n%2==0 ?"0":"1")+r; n/=2;}
+        while(e!=0) {r=(e%2==0 ?"0":"1")+r; e/=2;}
         return r;
     }
 }
