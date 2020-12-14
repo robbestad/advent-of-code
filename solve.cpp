@@ -7,6 +7,7 @@
 #include "source/2020/13_2.h"
 #include "source/2020/14_2.h"
 #include "source/2020/14.h"
+#include "source/2020/15.h"
 
 int main() {
 
@@ -17,6 +18,10 @@ int main() {
     //day14::part1("14 part 1", "input/14.txt");
     //day14::part1("14 part 1 test", "input/14t.txt");
     //day14::part2("14 part 2", "input/14.txt");
-    day14::part2("14 part 2 test", "input/14.txt");
+    //day14::part2("14 part 2 test", "input/14.txt");
+    day15::part1("15 part 1", "input/15.txt");
+    day15::part1("15 part 1 test", "input/15t.txt");
+    day15::part2("15 part 2 test", "input/15t.txt");
+    day15::part2("15 part 2", "input/15t.txt");
 
 }
