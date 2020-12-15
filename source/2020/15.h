@@ -11,8 +11,6 @@
 using namespace std;
 namespace day15 {
     using Clock = std::chrono::high_resolution_clock;
-    //int iterations = 2020;
-    long iterations = 30000000;
 
     bool is_new(const vector<long> &numbers, long number) {
         bool found{false};
@@ -39,14 +37,11 @@ namespace day15 {
         return pair(matches[matches.size() - 1], matches[matches.size() - 2]);
     }
 
-    void part1(const string &label, const string &path) {
+    void part1(const string &label, const std::vector<long> &input, int iterations) {
         auto t1 = Clock::now();
-        std::vector<long> numbers = {7, 14, 0, 17, 11, 1, 2};
-        //std::vector<long> numbers = {0, 3, 6};
+        std::vector<long> numbers = input;
         long next = 0;
         long counter = 0;
-        std::cout << iterations << endl;
-
         auto i = numbers.size() + 1;
         for (auto n = numbers.size() - 1; n <= numbers.size(); n++) {
             long last_number = numbers[n];
@@ -63,15 +58,17 @@ namespace day15 {
 
             auto[last, prev] = find_prev(numbers, last_number);
             next = (last + 1) - (prev + 1);
+            /*
             if (1 == iterations - numbers.size()) {
                 cout << endl << "turn " << i << "\t" << last_number << "\t" << (last + 1) << "-" << (prev + 1) << "\t\t"
                      << next
                      << endl;
             }
+            */
             i++;
-            if (counter++ == 1000000){
+            if (counter++ == 1000000) {
                 cout << i << endl;
-                counter=0;
+                counter = 0;
             }
 
             numbers.emplace_back(next);
@@ -80,13 +77,45 @@ namespace day15 {
 
         }
 
-        cout << endl;
-        size_t sum{0};
+        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
+        cout << label << ": "
+             << next << " ("
+             << result_time << "ms) ("
+             << iterations << ")"
+             << endl;
+    }
+
+
+    void part2(const string &label, const std::vector<size_t> &input, int iterations) {
+        auto t1 = Clock::now();
+        std::vector<size_t> numbers{};
+        numbers.resize(iterations);
+        int round = 0;
+        for (size_t i = 0; i < input.size() - 1; i++) {
+            round++;
+            numbers[input[i]] = round;
+            iterations--;
+        }
+        iterations--;
+        round++;
+
+        size_t prev = input.back();
+        size_t next{0};
+        for (int i = 0; i < iterations; i++) {
+            round++;
+            size_t last_number = numbers[prev];
+            numbers[prev] = round - 1;
+            if (last_number == 0)
+                prev = 0;
+            else
+                prev = round - 1 - last_number;
+        }
 
         size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
         cout << label << ": "
-             << sum << " ("
-             << result_time << ")"
+             << prev << " ("
+             << result_time << "ms) ("
+             << iterations << ")"
              << endl;
     }
 
