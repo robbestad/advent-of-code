@@ -65,7 +65,7 @@ namespace day15 {
     }
 
     void part1(const string &label, const string &path) {
-        auto t_read = Clock::now();
+        auto t1 = Clock::now();
         std::vector numbers{7,14,0,17,11,1,2};
         int next = -1;
         auto i = numbers.size() + 1;
@@ -73,24 +73,31 @@ namespace day15 {
             int last_number = numbers[n];
             if (is_new(numbers, last_number)) {
                 next = 0;
-                cout << "turn " << i++ << "\t" << last_number << "\t" << "new" << "*" << "new" "\t\t" << next << endl;
+                if(n>30000000){
+                    cout << "turn " << i++ << "\t" << last_number << "\t" << "new" << "*" << "new" "\t\t"
+                         << next << endl;
+                }
+
                 numbers.emplace_back(next);
                 continue;
             }
 
             auto[last, prev] = find_prev(numbers, last_number);
             next = (last + 1) - (prev + 1);
-            cout << "turn " << i++ << "\t" << last_number << "\t" << (last + 1) << "-" << (prev + 1) << "\t\t" << next
-                 << endl;
+            if(n>30000000) {
+                cout << "turn " << i++ << "\t" << last_number << "\t" << (last + 1) << "-" << (prev + 1) << "\t\t"
+                     << next
+                     << endl;
+            }
+
             numbers.emplace_back(next);
 
-            if (n > 2020)
+            if (n > 30000002)
                 break;
 
         }
 
         cout << endl;
-        auto t1 = Clock::now();
         size_t sum{0};
 
         size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
