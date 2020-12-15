@@ -41,7 +41,7 @@ namespace day15 {
         auto t1 = Clock::now();
         std::vector<long> numbers = input;
         long next = 0;
-        size_t sum{ 0 };
+        int sum{ 0 };
         long counter = 0;
         auto i = numbers.size() + 1;
         for (auto n = numbers.size() - 1; n <= numbers.size(); n++) {
@@ -70,18 +70,13 @@ namespace day15 {
                */
             }
             i++;
-            if (counter++ == 1000000) {
-                cout << i << endl;
-                counter = 0;
-            }
-
             numbers.emplace_back(next);
-            if (sum>0 || n>iterations)
+            if (sum>0 )
                 break;
 
         }
 
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
+        int result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
         cout << label << ": "
              << sum << " ("
              << result_time << "ms) ("
@@ -90,12 +85,12 @@ namespace day15 {
     }
 
 
-    void part2(const string &label, const std::vector<size_t> &input, int iterations) {
+    void part2(const string &label, const std::vector<int> &input, int iterations) {
         auto t1 = Clock::now();
-        std::vector<size_t> numbers{};
+        std::vector<int> numbers{};
         numbers.resize(iterations);
         int round = 0;
-        for (size_t i = 0; i < input.size() - 1; i++) {
+        for (int i = 0; i < input.size() - 1; i++) {
             round++;
             numbers[input[i]] = round;
             iterations--;
@@ -103,19 +98,19 @@ namespace day15 {
         iterations--;
         round++;
 
-        size_t prev = input.back();
-        size_t next{0};
+        int prev = input.back();
+        int next{0};
         for (int i = 0; i < iterations; i++) {
             round++;
-            size_t last_number = numbers[prev];
-            numbers[prev] = round - 1;
+            int last_number = numbers[prev];
+            numbers[prev] = (long)round - 1;
             if (last_number == 0)
                 prev = 0;
             else
                 prev = round - 1 - last_number;
         }
 
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
+        int result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
         cout << label << ": "
              << prev << " ("
              << result_time << "ms) ("

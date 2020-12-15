@@ -8,6 +8,7 @@
 #include "source/2020/14_2.h"
 #include "source/2020/14.h"
 #include "source/2020/15.h"
+#include "source/2020/16.h"
 
 int main() {
 
@@ -22,5 +23,6 @@ int main() {
     day15::part1("15 part 1 test ", {0, 3, 6}, 2020);
     day15::part2("15 part 2 test", {0, 3, 6}, 2020);
     day15::part2("15 part 2", {7, 14, 0, 17, 11, 1, 2}, 30000000);
+    day16::part1("16 part 1", "input/16t.txt");
 
 }

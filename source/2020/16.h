@@ -12,30 +12,29 @@ using namespace std;
 namespace day16 {
     using Clock = std::chrono::high_resolution_clock;
 
-    pair<size_t,size_t> part1(const vector<string>&input) {
+    void part1(const string &label, const string &path) {
         auto t1 = Clock::now();
         size_t result{0};
-
-        for(auto v:input){
+        auto t_read = Clock::now();
+        std::string input;
+        std::fstream f{path};
+        std::vector<std::string> addr_list;
+        while (f >> input) {
 
         }
+        size_t read_time = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now() - t_read).count();
 
         auto t2 = Clock::now();
         size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-        return {result,result_time};
+        cout << label << ": "
+             << result
+             << " (compute: "
+             << result_time << " us)"
+             << " (parse: "
+             << read_time << " us)"
+             << endl;
     }
 
-    pair<size_t,size_t> part2(const vector<string>&input) {
-        auto t1 = Clock::now();
-        size_t result{0};
-        for(auto v:input){
-
-        }
-
-        auto t2 = Clock::now();
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-        return {result,result_time};
-    }
 
 }
 
