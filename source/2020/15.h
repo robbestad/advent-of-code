@@ -11,88 +11,71 @@
 using namespace std;
 namespace day15 {
     using Clock = std::chrono::high_resolution_clock;
-    using ull = unsigned long long;
+    //int iterations = 2020;
+    long iterations = 30000000;
 
-    struct Number {
-        int value;
-        int position;
-
-        Number() = default;
-
-        Number(int position, int value) : position{position}, value{value} {}
-    };
-
-    bool is_new(const vector<int> &numbers, int number) {
-        vector<int> vec = numbers;
-        vec.pop_back();
+    bool is_new(const vector<long> &numbers, long number) {
         bool found{false};
-        std::vector<int> matches;
-        for (auto &elem : vec) {
-            if (elem == number) {
+        for (auto it = numbers.begin(); it != numbers.end(); ++it) {
+            if (std::next(it) == numbers.end()) {
+                break;
+            }
+            if (*it == number) {
                 found = true;
             }
         }
         return !found;
     }
 
-    std::vector<int> find_matches(const vector<int> &numbers, int number) {
-        vector<int> vec = numbers;
-        vec.pop_back();
-
-        std::vector<int> matches;
-        int n = 0;
-        for (auto &elem : vec) {
-            if (elem == number) {
-                Number game_number{n, number};
-                matches.emplace_back(n);
-            }
-            n++;
-        }
-        return matches;
-    }
-
-
-    pair<int, int> find_prev(const vector<int> &numbers, int number) {
-        std::vector<int> matches;
-        int n = 0;
+    pair<long, long> find_prev(const vector<long> &numbers, long number) {
+        std::vector<long> matches;
+        long n = 0;
         for (auto &elem : numbers) {
             if (elem == number) {
                 matches.emplace_back(n);
             }
             n++;
         }
-        return pair(matches[matches.size()-1], matches[matches.size()-2]);
+        return pair(matches[matches.size() - 1], matches[matches.size() - 2]);
     }
 
     void part1(const string &label, const string &path) {
         auto t1 = Clock::now();
-        std::vector numbers{7,14,0,17,11,1,2};
-        int next = -1;
+        std::vector<long> numbers = {7, 14, 0, 17, 11, 1, 2};
+        //std::vector<long> numbers = {0, 3, 6};
+        long next = 0;
+        long counter = 0;
+        std::cout << iterations << endl;
+
         auto i = numbers.size() + 1;
         for (auto n = numbers.size() - 1; n <= numbers.size(); n++) {
-            int last_number = numbers[n];
+            long last_number = numbers[n];
             if (is_new(numbers, last_number)) {
                 next = 0;
-                if(n>30000000){
-                    cout << "turn " << i++ << "\t" << last_number << "\t" << "new" << "*" << "new" "\t\t"
+                if (1 == iterations - numbers.size()) {
+                    cout << "turn " << i << "\t" << last_number << "\t" << "new" << "*" << "new" "\t\t"
                          << next << endl;
                 }
-
+                i++;
                 numbers.emplace_back(next);
                 continue;
             }
 
             auto[last, prev] = find_prev(numbers, last_number);
             next = (last + 1) - (prev + 1);
-            if(n>30000000) {
-                cout << "turn " << i++ << "\t" << last_number << "\t" << (last + 1) << "-" << (prev + 1) << "\t\t"
+            if (1 == iterations - numbers.size()) {
+                cout << endl << "turn " << i << "\t" << last_number << "\t" << (last + 1) << "-" << (prev + 1) << "\t\t"
                      << next
                      << endl;
             }
+            i++;
+            if (counter++ == 1000000){
+                cout << i << endl;
+                counter=0;
+            }
 
             numbers.emplace_back(next);
-
-            if (n > 30000002)
+            if (n > iterations)
                 break;
 
         }
@@ -107,26 +90,6 @@ namespace day15 {
              << endl;
     }
 
-    void part2(const string &label, const string &path) {
-        auto t1 = Clock::now();
-        size_t result{0};
-        std::string input;
-        std::fstream f{path};
-        std::map<ull, ull> memory, memory2;
-
-        while (f >> input) {
-
-        }
-
-        t1 = Clock::now();
-
-
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
-        cout << label << ": "
-             << result << " ("
-             << result_time << ")"
-             << endl;
-    }
 }
 
 #endif //AOC_15_H
