@@ -41,6 +41,7 @@ namespace day15 {
         auto t1 = Clock::now();
         std::vector<long> numbers = input;
         long next = 0;
+        size_t sum{ 0 };
         long counter = 0;
         auto i = numbers.size() + 1;
         for (auto n = numbers.size() - 1; n <= numbers.size(); n++) {
@@ -50,6 +51,7 @@ namespace day15 {
                 if (1 == iterations - numbers.size()) {
                     cout << "turn " << i << "\t" << last_number << "\t" << "new" << "*" << "new" "\t\t"
                          << next << endl;
+                   
                 }
                 i++;
                 numbers.emplace_back(next);
@@ -58,13 +60,15 @@ namespace day15 {
 
             auto[last, prev] = find_prev(numbers, last_number);
             next = (last + 1) - (prev + 1);
-            /*
+
             if (1 == iterations - numbers.size()) {
+             sum = next;
+               /*
                 cout << endl << "turn " << i << "\t" << last_number << "\t" << (last + 1) << "-" << (prev + 1) << "\t\t"
                      << next
                      << endl;
+               */
             }
-            */
             i++;
             if (counter++ == 1000000) {
                 cout << i << endl;
@@ -72,14 +76,14 @@ namespace day15 {
             }
 
             numbers.emplace_back(next);
-            if (n > iterations)
+            if (sum>0 || n>iterations)
                 break;
 
         }
 
         size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
         cout << label << ": "
-             << next << " ("
+             << sum << " ("
              << result_time << "ms) ("
              << iterations << ")"
              << endl;
