@@ -9,6 +9,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtx/hash.hpp>
+#include "../include/Math.h"
 #include "../include/utils.h"
 #include "../include/offsets.h"
 
@@ -17,7 +18,6 @@
 using std::string;
 using std::unordered_set;
 using std::unordered_map;
-using std::size_t;
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
 
@@ -46,10 +46,33 @@ namespace day17 {
         return cubes.size();
     }
 
+
     size_t part2(const unordered_set<glm::ivec4> &start_cubes, size_t cycles) {
         unordered_set<glm::ivec4> cubes = start_cubes;
-        for (size_t i = 0; i < cycles; ++i) {
+
+        for (size_t cycle = 0; cycle < cycles; ++cycle) {
             unordered_map<glm::ivec4, size_t> sum_cubes;
+            for (const auto &cube : cubes) {
+                for (const auto &offset : offsets4) {
+                    ++sum_cubes[glm::ivec4(cube) + offset];
+                }
+            }
+            unordered_set<glm::ivec4> next_cube;
+            for (const auto &sum : sum_cubes) {
+                if (sum.second == 2 && cubes.count(glm::vec4(sum.first)))
+                    next_cube.insert(glm::ivec4(sum.first));
+                if (sum.second == 3)
+                    next_cube.insert(glm::ivec4(sum.first));
+            }
+            cubes = next_cube;
+        }
+        return cubes.size();
+    }
+
+    uintmax_t part_2(const unordered_set<glm::ivec4> &start_cubes, size_t cycles) {
+        unordered_set<glm::ivec4> cubes = start_cubes;
+        for (size_t i = 0; i < cycles; i++) {
+            unordered_map<glm::ivec4, long> sum_cubes;
             for (const auto &cube : cubes) {
                 for (const auto &offset : offsets4) ++sum_cubes[cube + offset];
             }
@@ -66,7 +89,6 @@ namespace day17 {
     }
 
     void start(const string &label, const string &path) {
-        size_t result{0};
         std::fstream f{path};
         unordered_set<glm::ivec3> cubes;
         unordered_set<glm::ivec4> cubes4;
@@ -78,7 +100,7 @@ namespace day17 {
                     if (x[y] == '#') cubes.insert({y, row, 0});
                     if (x[y] == '#') cubes4.insert({y, row, 0, 0});
                 }
-                ++row;
+                row++;
             }
         }
         auto t1 = Clock::now();
@@ -87,6 +109,7 @@ namespace day17 {
              << " (compute: "
              << duration_cast<milliseconds>(Clock::now() - t1).count() << " us)"
              << endl;
+
 
         t1 = Clock::now();
         cout << endl << label << ": "
