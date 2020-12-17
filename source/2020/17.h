@@ -10,121 +10,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/hash.hpp>
 #include "../include/utils.h"
-
-constexpr static std::array<glm::ivec3, 26> offsets3 =
-        {{
-                 {-1, -1, -1},
-                 {-1, -1, 0},
-                 {-1, -1, +1},
-                 {-1, 0, -1},
-                 {-1, 0, 0},
-                 {-1, 0, +1},
-                 {-1, +1, -1},
-                 {-1, +1, 0},
-                 {-1, +1, +1},
-                 {0, -1, -1},
-                 {0, -1, 0},
-                 {0, -1, +1},
-                 {0, 0, -1},
-                 {0, 0, +1},
-                 {0, +1, -1},
-                 {0, +1, 0},
-                 {0, +1, +1},
-                 {+1, -1, -1},
-                 {+1, -1, 0},
-                 {+1, -1, +1},
-                 {+1, 0, -1},
-                 {+1, 0, 0},
-                 {+1, 0, +1},
-                 {+1, +1, -1},
-                 {+1, +1, 0},
-                 {+1, +1, +1},
-         }};
-
-constexpr static std::array<glm::ivec4, 80> offsets4 =
-        {{
-                 {-1, -1, -1, -1},
-                 {-1, -1, -1, +0},
-                 {-1, -1, -1, +1},
-                 {-1, -1, +0, -1},
-                 {-1, -1, +0, +0},
-                 {-1, -1, +0, +1},
-                 {-1, -1, +1, -1},
-                 {-1, -1, +1, +0},
-                 {-1, -1, +1, +1},
-                 {-1, +0, -1, -1},
-                 {-1, +0, -1, +0},
-                 {-1, +0, -1, +1},
-                 {-1, +0, +0, -1},
-                 {-1, +0, +0, +0},
-                 {-1, +0, +0, +1},
-                 {-1, +0, +1, -1},
-                 {-1, +0, +1, +0},
-                 {-1, +0, +1, +1},
-                 {-1, +1, -1, -1},
-                 {-1, +1, -1, +0},
-                 {-1, +1, -1, +1},
-                 {-1, +1, +0, -1},
-                 {-1, +1, +0, +0},
-                 {-1, +1, +0, +1},
-                 {-1, +1, +1, -1},
-                 {-1, +1, +1, +0},
-                 {-1, +1, +1, +1},
-                 {+0, -1, -1, -1},
-                 {+0, -1, -1, +0},
-                 {+0, -1, -1, +1},
-                 {+0, -1, +0, -1},
-                 {+0, -1, +0, +0},
-                 {+0, -1, +0, +1},
-                 {+0, -1, +1, -1},
-                 {+0, -1, +1, +0},
-                 {+0, -1, +1, +1},
-                 {+0, +0, -1, -1},
-                 {+0, +0, -1, +0},
-                 {+0, +0, -1, +1},
-                 {+0, +0, +0, -1},
-                 {+0, +0, +0, +1},
-                 {+0, +0, +1, -1},
-                 {+0, +0, +1, +0},
-                 {+0, +0, +1, +1},
-                 {+0, +1, -1, -1},
-                 {+0, +1, -1, +0},
-                 {+0, +1, -1, +1},
-                 {+0, +1, +0, -1},
-                 {+0, +1, +0, +0},
-                 {+0, +1, +0, +1},
-                 {+0, +1, +1, -1},
-                 {+0, +1, +1, +0},
-                 {+0, +1, +1, +1},
-                 {+1, -1, -1, -1},
-                 {+1, -1, -1, +0},
-                 {+1, -1, -1, +1},
-                 {+1, -1, +0, -1},
-                 {+1, -1, +0, +0},
-                 {+1, -1, +0, +1},
-                 {+1, -1, +1, -1},
-                 {+1, -1, +1, +0},
-                 {+1, -1, +1, +1},
-                 {+1, +0, -1, -1},
-                 {+1, +0, -1, +0},
-                 {+1, +0, -1, +1},
-                 {+1, +0, +0, -1},
-                 {+1, +0, +0, +0},
-                 {+1, +0, +0, +1},
-                 {+1, +0, +1, -1},
-                 {+1, +0, +1, +0},
-                 {+1, +0, +1, +1},
-                 {+1, +1, -1, -1},
-                 {+1, +1, -1, +0},
-                 {+1, +1, -1, +1},
-                 {+1, +1, +0, -1},
-                 {+1, +1, +0, +0},
-                 {+1, +1, +0, +1},
-                 {+1, +1, +1, -1},
-                 {+1, +1, +1, +0},
-                 {+1, +1, +1, +1},
-         }};
-
+#include "../include/offsets.h"
 
 #ifndef AOC_17_H
 #define AOC_17_H
@@ -132,86 +18,81 @@ using std::string;
 using std::unordered_set;
 using std::unordered_map;
 using std::size_t;
-using std::uintmax_t;
-
+using std::chrono::duration_cast;
+using std::chrono::milliseconds;
 
 namespace day17 {
     using Clock = std::chrono::high_resolution_clock;
 
     size_t part1(const unordered_set<glm::ivec3> &start_cubes, size_t cycles) {
-        std::unordered_set<glm::ivec3> cubes = start_cubes;
+        unordered_set<glm::ivec3> cubes = start_cubes;
 
-        for (std::size_t cycle = 0; cycle < cycles; ++cycle) {
-            std::unordered_map<glm::ivec3, std::uintmax_t> sum_of_fields;
+        for (size_t cycle = 0; cycle < cycles; ++cycle) {
+            unordered_map<glm::ivec3, size_t> sum_cubes;
             for (const auto &cube : cubes) {
                 for (const auto &offset : offsets3) {
-                    ++sum_of_fields[glm::ivec3(cube) + offset];
+                    ++sum_cubes[glm::ivec3(cube) + offset];
                 }
             }
-            unordered_set<glm::ivec3> NextField;
-            for (const auto &Sum : sum_of_fields) {
-                if (Sum.second == 2 && cubes.count(glm::vec4(Sum.first, 1)))
-                    NextField.insert(glm::ivec4(Sum.first, 1));
-                if (Sum.second == 3)
-                    NextField.insert(glm::ivec4(Sum.first, 1));
+            unordered_set<glm::ivec3> next_cube;
+            for (const auto &sum : sum_cubes) {
+                if (sum.second == 2 && cubes.count(glm::vec4(sum.first, 1)))
+                    next_cube.insert(glm::ivec4(sum.first, 1));
+                if (sum.second == 3)
+                    next_cube.insert(glm::ivec4(sum.first, 1));
             }
-            cubes = NextField;
+            cubes = next_cube;
         }
         return cubes.size();
     }
 
     size_t part2(const unordered_set<glm::ivec4> &start_cubes, size_t cycles) {
         unordered_set<glm::ivec4> cubes = start_cubes;
-
-        for (size_t cycle = 0; cycle < cycles; ++cycle) {
-            unordered_map<glm::ivec4, uintmax_t> sum_of_fields;
+        for (size_t i = 0; i < cycles; ++i) {
+            unordered_map<glm::ivec4, size_t> sum_cubes;
             for (const auto &cube : cubes) {
-                for (const auto &offset : offsets4) {
-                    ++sum_of_fields[(cube + offset)];
-                }
+                for (const auto &offset : offsets4) ++sum_cubes[cube + offset];
             }
-            unordered_set<glm::ivec4> NextField;
-            for (const auto &Sum : sum_of_fields) {
-                if (Sum.second == 2 && cubes.count(Sum.first))
-                    NextField.insert(Sum.first);
-                if (Sum.second == 3 && cubes.count(Sum.first))
-                    NextField.insert(Sum.first);
+            unordered_set<glm::ivec4> next_cube;
+            for (const auto &sum : sum_cubes) {
+                if (sum.second == 2 && cubes.count(sum.first))
+                    next_cube.insert(sum.first);
+                if (sum.second == 3 && !cubes.count(sum.first))
+                    next_cube.insert(sum.first);
             }
-            cubes = NextField;
+            cubes = next_cube;
         }
         return cubes.size();
     }
 
     void start(const string &label, const string &path) {
-        auto t1 = Clock::now();
         size_t result{0};
         std::fstream f{path};
         unordered_set<glm::ivec3> cubes;
+        unordered_set<glm::ivec4> cubes4;
         string x;
         size_t row = 0;
         while (f >> x) {
             {
                 for (size_t y = 0; y < x.size(); ++y) {
                     if (x[y] == '#') cubes.insert({y, row, 0});
+                    if (x[y] == '#') cubes4.insert({y, row, 0, 0});
                 }
                 ++row;
             }
         }
-        result = part1(cubes, 6);
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
+        auto t1 = Clock::now();
         cout << endl << label << ": "
-             << result
+             << part1(cubes, 6)
              << " (compute: "
-             << result_time << " us)"
+             << duration_cast<milliseconds>(Clock::now() - t1).count() << " us)"
              << endl;
 
         t1 = Clock::now();
-        //result = part2(cubes, 6);
-        result_time = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - t1).count();
         cout << endl << label << ": "
-             << result
+             << part2(cubes4, 6)
              << " (compute: "
-             << result_time << " us)"
+             << duration_cast<milliseconds>(Clock::now() - t1).count() << " us)"
              << endl;
     }
 
