@@ -10,6 +10,7 @@
 #include "source/2020/15.h"
 #include "source/2020/16.h"
 #include "source/2020/16_2.h"
+#include "source/2020/17.h"
 
 int main() {
 
@@ -26,7 +27,8 @@ int main() {
     day15::part2("15 part 2", {7, 14, 0, 17, 11, 1, 2}, 30000000);
     */
     //day16::part1("16 part 1", "input/16t.txt");
-    day16::part2("16 part 2", "input/16t.txt");
+    //day16::part2("16 part 2", "input/16t.txt");
     //day16::day16_2("16 part 2", "input/16.txt");
+    day17::start("17 part 1", "input/17.txt");
 
 }
