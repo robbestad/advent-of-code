@@ -15,21 +15,19 @@
 
 #ifndef AOC_18_H
 #define AOC_18_H
-using std::string;
-using std::unordered_set;
-using std::unordered_map;
-using std::chrono::duration_cast;
-using std::chrono::milliseconds;
 
 namespace day18 {
+    using std::string;
+    using std::vector;
+    using std::unordered_set;
+    using std::cout;
+    using std::endl;
+    using std::unordered_map;
+    using std::chrono::duration_cast;
+    using std::chrono::milliseconds;
     using Clock = std::chrono::high_resolution_clock;
 
-    string convertToString(const char *a) {
-        string s(a);
-        return s;
-    }
-
-    enum class operators {
+    enum class Operators {
         PLUS,
         MINUS,
         MULT,
@@ -37,77 +35,127 @@ namespace day18 {
         NONE
     };
 
-    size_t part1(const vector<string> &line) {
-        string l1 = "2 * 3 + (4 * 5)";
-        //string l = "(2 + 6) * 2 + 2 + 4";
-        int sum{0};
-        int tsum{};
-        int digit1{-1};
-        int digit2{-1};
-        string t;
-        operators op{operators::NONE};
-
-        bool parens = false;
-        for (auto l:l1) {
-            if (isdigit(l)) {
-                if (digit1 == -1)
-                    digit1 = l - 48;
-            }
-            if (l == '*')
-                op = operators::MULT;
-            if (l == '-')
-                op = operators::MINUS;
-            if (l == '/')
-                op = operators::DIV;
-            if (l == '+')
-                op = operators::PLUS;
-
-            if (l == '(')
-                parens = true;
-            if (l == ')')
-                parens = false;
-
-            if (l == ' ') {
-                if (digit1 >= 0)
-                    if (op != operators::NONE) {
-                        if (op == operators::PLUS)
-                            sum = sum + digit1;
-                        if (op == operators::MINUS)
-                            sum = sum - digit1;
-                        if (op == operators::DIV)
-                            sum = sum / digit1;
-                        if (op == operators::MULT)
-                            sum = sum * digit1;
-                        digit1 = -1;
-                        digit2 = -1;
-                        //op = operators::NONE;
-                        cout << sum << ",";
-                    }
-                if (parens) {
-                }
-            }
-        }
-        if (op != operators::NONE) {
-            if (op == operators::PLUS)
+    void calculate(Operators &op, int &sum, int &digit1, int &digit2, bool reset_operator) {
+        if (op != Operators::NONE) {
+            if (op == Operators::PLUS)
                 sum = sum + digit1;
-            if (op == operators::MINUS)
+            if (op == Operators::MINUS)
                 sum = sum - digit1;
-            if (op == operators::DIV)
+            if (op == Operators::DIV)
                 sum = sum / digit1;
-            if (op == operators::MULT)
+            if (op == Operators::MULT)
                 sum = sum * digit1;
             digit1 = -1;
             digit2 = -1;
-            op = operators::NONE;
-            cout << sum << ":";
+            if (reset_operator)
+                op = Operators::NONE;
+        }
+    }
+
+    int calculate_parens(std::vector<int> &digits, std::vector<Operators> &operators) {
+        int result{0};
+
+        for (int n = 0; n < digits.size(); n++) {
+            if (n > 0 && n % 2 != 0) {
+                if (operators[n - 1] == Operators::PLUS)
+                    result += digits[n - 1] * digits[n];
+                if (operators[n - 1] == Operators::MINUS)
+                    result += digits[n - 1] * digits[n];
+                if (operators[n - 1] == Operators::DIV)
+                    result += digits[n - 1] * digits[n];
+                if (operators[n - 1] == Operators::MULT)
+                    result += digits[n - 1] * digits[n];
+            }
+        }
+        return result;
+    }
+
+    size_t part1(const string &l1) {
+        int sum{0};
+        int digit1{-1};
+        int digit2{-1};
+        string t;
+        Operators op{Operators::NONE};
+        bool parens{false};
+        bool first{true};
+        size_t parens_level{0};
+        vector<int> digits;
+        vector<Operators> operators;
+
+        for (auto l:l1) {
+            if (isdigit(l)) {
+                if (parens) {
+                    digits.emplace_back(l - 48);
+                }
+                if (digit1 == -1) {
+                    if (!first)
+                        digit1 = l - 48;
+                    else {
+                        sum = l - 48;
+                        first = false;
+                    }
+                }
+            }
+            if (l == '*') {
+                op = Operators::MULT;
+                if (parens) {
+                    operators.emplace_back(op);
+                }
+            }
+            if (l == '-') {
+                op = Operators::MINUS;
+                if (parens) {
+                    operators.emplace_back(op);
+                }
+            }
+            if (l == '/') {
+                op = Operators::DIV;
+                if (parens) {
+                    operators.emplace_back(op);
+                }
+            }
+            if (l == '+') {
+                op = Operators::PLUS;
+                if (parens) {
+                    operators.emplace_back(op);
+                }
+            }
+
+            if (l == '(') {
+                parens_level++;
+                parens = true;
+            }
+            if (l == ')') {
+                parens_level--;
+                sum += calculate_parens(digits, operators);
+                op = Operators::NONE;
+                if (parens_level == 0)
+                    parens = false;
+            }
+
+            if (l == ' ') {
+                if (digit1 >= 0)
+                    if (!parens)
+                        if (op != Operators::NONE) {
+                            calculate(op, sum, digit1, digit2, false);
+                        }
+                if (parens) {
+
+                }
+            }
         }
 
-        cout << "----";
+        if (op != Operators::NONE) {
+            calculate(op, sum, digit1, digit2, true);
+        }
+
         return sum;
     }
 
+#ifndef UNIT_TESTING
 
     void start(const string &label, const string &path) {
+        size_t sum{0};
         std::fstream f{path};
         vector<string> ops;
         string line;
@@ -118,16 +166,34 @@ namespace day18 {
             }
         }
         auto t1 = Clock::now();
+
+        cout << part1("2 * 3 + (4 * 5)") << endl;
+        cout << part1("1 + (2 * 3) + (4 * (5 + 6))") << endl;
+
+        /*
+        auto t1 = Clock::now();
         cout << endl << label << ": "
-             << part1(ops)
+             << sum
              << " (compute: "
              << duration_cast<milliseconds>(Clock::now() - t1).count() << " us)"
              << endl;
-
+*/
 
     }
 
+#else
 
+#define CATCH_CONFIG_MAIN
+#include <catch2/catch.hpp>
+#include <sstream>
+
+
+    TEST_CASE("Test with zero", "[classic]")
+{
+    REQUIRE(fizzbuzz(0) == "0");
 }
+#endif
+}
+
 
 #endif //AOC_18_H

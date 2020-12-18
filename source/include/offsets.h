@@ -1,4 +1,5 @@
-
+#ifndef OFFSETS_H
+#define OFFSETS_H
 constexpr static std::array<glm::ivec3, 26> offsets3 = {
         {
                 {-1, -1, -1},
@@ -114,3 +115,4 @@ constexpr static std::array<glm::ivec4, 80> offsets4 = {
                 {+1, +1, +1, +1},
         }
 };
+#endif
