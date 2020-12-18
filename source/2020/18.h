@@ -81,20 +81,20 @@ namespace day18 {
     }
 
     void set_parens(vector<std::pair<int, vector<SIGNS>>> &my_ops, SIGNS op, int parens_level) {
-        vector<SIGNS> vec_signs;
+        vector<SIGNS> signs;
         if (!my_ops.empty()) {
             if (my_ops.size() >= parens_level) {
                 if (!my_ops[parens_level].second.empty()) {
-                    vec_signs = my_ops[parens_level].second;
+                    signs = my_ops[parens_level].second;
                 }
             }
         }
-        vec_signs.emplace_back(op);
+        signs.emplace_back(op);
         if (my_ops.size() > parens_level)
-            my_ops[parens_level].second = vec_signs;
+            my_ops[parens_level].second = signs;
         else
-            my_ops.emplace_back(std::pair(parens_level, vec_signs));
-        vec_signs.clear();
+            my_ops.emplace_back(std::pair(parens_level, signs));
+        signs.clear();
     }
 
     int part1(const string &l1) {
@@ -147,30 +147,26 @@ namespace day18 {
             if (l == '*') {
                 if (parens) {
                     set_parens(ops, SIGNS::MULT, parens_level);
-                } else {
-                    op = SIGNS::MULT;
                 }
+                op = SIGNS::MULT;
             }
             if (l == '-') {
                 if (parens) {
                     set_parens(ops, SIGNS::MINUS, parens_level);
-                } else {
-                    op = SIGNS::MINUS;
                 }
+                op = SIGNS::MINUS;
             }
             if (l == '/') {
                 if (parens) {
                     set_parens(ops, SIGNS::DIV, parens_level);
-                } else {
-                    op = SIGNS::DIV;
                 }
+                op = SIGNS::DIV;
             }
             if (l == '+') {
                 if (parens) {
                     set_parens(ops, SIGNS::PLUS, parens_level);
-                } else {
-                    op = SIGNS::PLUS;
                 }
+                op = SIGNS::PLUS;
             }
 
             if (l == '(') {
