@@ -10,32 +10,40 @@
 #define AOC_20_H
 using namespace std;
 namespace day20 {
+    using std::string;
+    using std::vector;
+    using std::unordered_set;
+    using std::cout;
+    using std::endl;
+    using std::unordered_map;
+    using std::chrono::duration_cast;
+    using std::chrono::milliseconds;
     using Clock = std::chrono::high_resolution_clock;
 
-    pair<size_t,size_t> part1(const vector<string>&input) {
-        auto t1 = Clock::now();
-        size_t result{0};
-
-        for(auto v:input){
-
-        }
-
-        auto t2 = Clock::now();
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-        return {result,result_time};
+    void part1(const vector<string> &input) {
     }
 
-    pair<size_t,size_t> part2(const vector<string>&input) {
-        auto t1 = Clock::now();
-        size_t result{0};
-        for(auto v:input){
-
-        }
-
-        auto t2 = Clock::now();
-        size_t result_time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-        return {result,result_time};
+    void part2(const vector<string> &input) {
     }
+
+    string
+    getInput( std::ifstream &file ) {
+        std::string str{};
+        int index;
+        while (std::getline(file, str)) {
+            if (str.empty())
+                break;
+            std::stringstream ss(str);
+            cout << str << endl;
+        }
+        return str;
+    }
+
+    void start(const string &label, const string &path) {
+        std::ifstream input_file(path);
+        auto input = getInput(input_file);
+    }
+
 }
 
 #endif //AOC_20_H
