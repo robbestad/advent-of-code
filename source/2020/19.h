@@ -289,7 +289,7 @@ namespace day19 {
 
 
     std::pair<std::vector<Rule>, std::vector<std::string>>
-    getInput( std::ifstream &file ) {
+    read_input( std::ifstream &file ) {
         std::vector<Rule> rules{};
         std::vector<std::string> strings{};
 
@@ -387,7 +387,7 @@ namespace day19 {
 
     void start2(const string &label, const string &path) {
         std::ifstream input_file( path );
-        auto input = getInput( input_file );
+        auto input = read_input( input_file );
 
         auto &rules = input.first;
         auto &strings = input.second;

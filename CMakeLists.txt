@@ -1,15 +1,29 @@
 cmake_minimum_required(VERSION 3.17)
 project(aoc)
-include_directories(/usr/local/include)
+include_directories(
+        /usr/local/include
+        ./vcpkg/packages/catch2_x64-osx/include
+)
 
-Include(FetchContent)
-
-FetchContent_Declare(
+find_package(
         Catch2
-        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        GIT_TAG        v2.13.1)
+        CONFIG
+        REQUIRED)
 
-FetchContent_MakeAvailable(Catch2)
+find_package(
+        fmt
+        CONFIG
+        REQUIRED)
+
+find_package(
+        glm
+        CONFIG
+        REQUIRED)
+
+find_package(
+        range-v3
+        CONFIG
+        REQUIRED)
 
 
 set(glm_DIR /Users/sven/source/glm/cmake/glm) # if necessary
