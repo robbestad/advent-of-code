@@ -25,10 +25,6 @@ find_package(
         CONFIG
         REQUIRED)
 
-
-set(glm_DIR /Users/sven/source/glm/cmake/glm) # if necessary
-find_package(glm REQUIRED)
-
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(aoc "solve.cpp")
