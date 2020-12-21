@@ -7,6 +7,7 @@
 #ifndef AOC_UTILS_H
 #define AOC_UTILS_H
 
+
 namespace utils {
 
     template<typename T>

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 project(aoc)
 include_directories(
         /usr/local/include
+        /Users/Sven/source/include/glm
         ./vcpkg/packages/catch2_x64-osx/include
 )
 
@@ -27,8 +28,8 @@ find_package(
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(aoc "solve.cpp")
-target_link_libraries(aoc glm::glm)
+add_executable(aoc "solve.cpp" source/include/common.h)
+#target_link_libraries(aoc glm::glm)
 target_compile_options(
         aoc
         PUBLIC $<$<CXX_COMPILER_ID:MSVC>:-W4
