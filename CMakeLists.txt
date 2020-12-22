@@ -29,6 +29,7 @@ find_package(
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(aoc "solve.cpp" source/include/common.h)
+target_link_libraries(aoc PRIVATE range-v3 range-v3-meta range-v3::meta range-v3-concepts)
 #target_link_libraries(aoc glm::glm)
 target_compile_options(
         aoc

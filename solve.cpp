@@ -13,8 +13,8 @@ int main() {
     //day19::start2("19", "input/19.txt");
     //day20::start("20", "input/20t.txt");
     //day21::start("21", "input/21.txt");
-    day22::start("22", "input/22.txt");
-    //2553 feil
+    day22::play1("22", "input/22.txt");
+    day22::play2("22", "input/22.txt");
 
     return 0;
 }
