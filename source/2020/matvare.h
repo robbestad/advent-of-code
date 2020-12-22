@@ -22,6 +22,7 @@ public:
         mulige_allergener = allergener_s;
     }
 
+
     std::string ingredienser;
     std::string mulige_allergener;
 private:
