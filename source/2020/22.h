@@ -54,16 +54,16 @@ namespace day22 {
         player2.pop_front();
 
         if (winner == 1) {
-            cout << "Round " << round << "\t\tPlayer 1 wins the round!" << endl;
+            //cout << "Round " << round << "\t\tPlayer 1 wins the round!" << endl;
             player1.push_back(p1);
             player1.push_back(p2);
         } else if (winner == 2) {
-            cout << "Round " << round << "\t\tPlayer 2 wins the round!" << endl;
+            //cout << "Round " << round << "\t\tPlayer 2 wins the round!" << endl;
             player2.push_back(p2);
             player2.push_back(p1);
         } else if (winner == 0) {
-            player2.push_back(p2);
-            player1.push_back(p1);
+            //player2.push_back(p2);
+            //player1.push_back(p1);
             //cout << "***TIE" << endl;
         }
         round += 1;
@@ -87,7 +87,11 @@ namespace day22 {
         size_t round{0};
         do {
             play(round, player1, player2);
-        } while (!player1.empty() || !player1.empty());
+            if(player1.empty())
+                break;
+            if(player2.empty())
+                break;
+        } while (true);
 
         unsigned long score{0};
         if (!player1.empty())
