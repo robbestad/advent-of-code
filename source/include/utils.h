@@ -164,16 +164,28 @@ namespace utils {
     }
 
     template<typename T>
-    int get_digit(T n, int position) {
+    T get_digit(T n, size_t position) {
         std::ostringstream os;
         std::string digits = os.str();
-        std::vector<T> int_to_vec;
+        std::vector<T> vec_digits;
         while (n > 0) {
-            int_to_vec.template emplace_back(n % 10);
+            vec_digits.template emplace_back(n % 10);
             n = n / 10;
         }
-        std::reverse(int_to_vec.begin(),int_to_vec.end());
-        return int_to_vec.at(position);
+        std::reverse(vec_digits.begin(),vec_digits.end());
+        return vec_digits.at(position);
+    }
+    template<typename T>
+    std::vector<T> get_digits(T n) {
+        std::ostringstream os;
+        std::string digits = os.str();
+        std::vector<T> vec_digits;
+        while (n > 0) {
+            vec_digits.template emplace_back(n % 10);
+            n = n / 10;
+        }
+        std::reverse(vec_digits.begin(),vec_digits.end());
+        return vec_digits;
     }
 
 
