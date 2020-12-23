@@ -40,7 +40,7 @@ namespace day18 {
         if (value == SIGNS::MINUS) return out << "MINUS";
         if (value == SIGNS::MULT) return out << "MULT";
         if (value == SIGNS::DIV) return out << "DIV";
-        if (value == SIGNS::NONE) return out << 'NONE';
+        if (value == SIGNS::NONE) return out << "NONE";
         return out << endl;
     }
 

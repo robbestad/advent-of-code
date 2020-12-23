@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+
 #ifndef AOC_UTILS_H
 #define AOC_UTILS_H
 
@@ -128,15 +129,17 @@ namespace utils {
     }
 
     template<typename E>
-     std::string toBinary(E e) noexcept {
+    std::string toBinary(E e) noexcept {
         std::string r;
-        while(e!=0) {r=(e%2==0 ?"0":"1")+r; e/=2;}
+        while (e != 0) {
+            r = (e % 2 == 0 ? "0" : "1") + r;
+            e /= 2;
+        }
         return r;
     }
 
-    template <typename T>
-    T reverse(T n, size_t b = sizeof(T) * std::numeric_limits<T>::digits)
-    {
+    template<typename T>
+    T reverse(T n, size_t b = sizeof(T) * std::numeric_limits<T>::digits) {
         T rv = 0;
         for (size_t i = 0; i < b; ++i, n >>= 1) {
             rv = (rv << 1) | (n & 0x01);
@@ -144,7 +147,7 @@ namespace utils {
         return rv;
     }
 
-    template <typename T>
+    template<typename T>
     long bin_to_dec(T n) {
         T num = n;
         auto dec_value = 0;
@@ -159,5 +162,21 @@ namespace utils {
         }
         return dec_value;
     }
+
+    template<typename T>
+    int get_digit(T n, int position) {
+        std::ostringstream os;
+        std::string digits = os.str();
+        std::vector<T> int_to_vec;
+        while (n > 0) {
+            int_to_vec.template emplace_back(n % 10);
+            n = n / 10;
+        }
+        std::reverse(int_to_vec.begin(),int_to_vec.end());
+        return int_to_vec.at(position);
+    }
+
+
+
 }
 #endif //AOC_UTILS_H
