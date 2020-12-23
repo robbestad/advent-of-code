@@ -12,85 +12,77 @@
 namespace day23 {
     using Clock = std::chrono::high_resolution_clock;
 
-    int getDigit(int n, int position) {
-        return (n % (int) pow(10, position) - (n % (int) pow(10, position - 1))) / (int) pow(10, position - 1);
-    }
-
-    std::pair<size_t, std::string>
-    play(size_t input, size_t num, size_t iterator, size_t length, size_t last_destination) {
-        vector<size_t> pickedup;
-        size_t destination;
-        size_t current_cup;
-        size_t destination_pos;
-        vector<size_t> numbers = utils::get_digits(input);
-        std::deque<size_t> number_qu{};
-        for (size_t n = 0; n < length; n++) {
-            number_qu.push_back(numbers[n]);
-        }
-        for (size_t n = iterator + 1; n < length; n++) {
-            if (n < 8)
-                pickedup.emplace_back(utils::get_digit(input, n));
-            else
-                pickedup.emplace_back(utils::get_digit(input, n - 8));
-        }
+    std::pair<int, std::string>
+    play(int input, int num, int iterator, int length, int last_destination) {
+        vector<int> pickedup;
+        int destination;
+        int current_cup;
+        int destination_pos;
+        vector<int> numbers = utils::get_digits(input);
+        std::deque<int> number_qu{};
+        std::deque<int> next_qu{};
         current_cup = utils::get_digit(input, iterator);
-        size_t last{1};
+        int last{1};
         destination = current_cup - last;
-        /*while (destination == last_destination) {
-            destination = current_cup - last++;
-        }*/
-        
+        int current_it{iterator};
+        int count{0};
 
+        for (int n = 0; n < length; n++) {
+            number_qu.push_back(numbers[n]);
+            count++;
+        }
 
+        next_qu.push_back(current_cup);
+        next_qu.push_back(destination);
 
-
-        //finn posisjon
-        for (size_t n = 0; n < length; n++) {
-            if (utils::get_digit(input, n) == destination) {
-                destination_pos = n;
+        for (int n = destination - 1; n < length; n++) {
+            if (n < 9) {
+                if (numbers[n] != destination)
+                    next_qu.push_back(numbers[n]);
+                iterator = n;
+            } else {
+                if (numbers[n - 9] != destination)
+                    next_qu.push_back(numbers[n - 9]);
+                iterator = n - 8;
             }
+            count++;
         }
 
-        cout << "current cup:" << current_cup << endl;
-        cout << "destination:" << destination << "(" << destination_pos << ")" << endl;
-
-        //legg tilbake
         std::string out;
-        out = "0";
-        /*
-        for (size_t n = 0; n < (destination - 1); n++) {
-            out += std::to_string(utils::get_digit(input, n));
+        for (auto q:next_qu) {
+            out += std::to_string(q);
         }
-         */
-        //out += std::to_string(temp[0]);
+
         return std::make_pair(destination, out);
     }
 
-    void start(const string &lbl, size_t input) {
+    void start(const string &lbl, int input) {
         auto t1 = Clock::now();
-        size_t result{0};
-        size_t it{0};
-        size_t move{0};
-        size_t prev{0};
-        vector<size_t> pickup;
+        int result{0};
+        int it{0};
+        int move{0};
+        int prev{0};
+        vector<int> pickup;
         input = 389125467;
 
         do {
-            cout << "move: " << move + 1 << endl;
-            cout << input << endl;
+            cout << "move:\t" << move + 1 << endl;
+            cout << "inpt:\t" << input << endl;
             auto[last_destination, next] = play(input, 3, it, 9, prev);
             prev = last_destination;
             input = stoi(next);
+            cout << "next:\t" << input;
+            cout << endl << endl;
 
-            cout << "next: " << next;
-            cout << endl;
-            cout << endl;
+            if(move+1==1) assert(input==328915467);
+            if(move+1==2) assert(input==325467891);
+
 
             it++;
             if (it > 8)
                 it = 0;
 
-        } while (move++ < 1);
+        } while (move++ <= 0);
 
         cout << result;
     }

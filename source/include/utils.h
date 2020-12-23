@@ -175,6 +175,7 @@ namespace utils {
         std::reverse(vec_digits.begin(),vec_digits.end());
         return vec_digits.at(position);
     }
+
     template<typename T>
     std::vector<T> get_digits(T n) {
         std::ostringstream os;
