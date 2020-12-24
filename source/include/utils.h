@@ -173,6 +173,7 @@ namespace utils {
         std::reverse(vec_digits.begin(),vec_digits.end());
         return vec_digits.at(position);
     }
+
     template<typename T>
     std::vector<T> get_digits(T n) {
         std::vector<T> vec_digits;
@@ -184,6 +185,41 @@ namespace utils {
         return vec_digits;
     }
 
+    template<typename T>
+    std::deque<T> get_digits_to_qu(T n) {
+        std::ostringstream os;
+        std::string digits = os.str();
+        std::deque<T> digits_qu;
+        while (n > 0) {
+            digits_qu.push_back(n % 10);
+            n = n / 10;
+        }
+        return digits_qu;
+    }
+    template<typename T>
+    void remove_intersection(const std::vector<T>& a, std::vector<T>& b){
+        std::unordered_multiset<T> st;
+        st.insert(a.begin(), a.end());
+        st.insert(b.begin(), b.end());
+        auto predicate = [&st](const T& k){ return st.count(k) > 1; };
+        //a.erase(std::remove_if(a.begin(), a.end(), predicate), a.end());
+        b.erase(std::remove_if(b.begin(), b.end(), predicate), b.end());
+    }
+
+    template<typename T>
+    void remove_intersection_qu(std::vector<T> a, std::vector<T>& b,std::deque<T>& out){
+        std::vector<T> temp{};
+        for(auto val:b)
+            temp.emplace_back(val);
+        std::unordered_multiset<T> st;
+        st.insert(a.begin(), a.end());
+        st.insert(b.begin(), b.end());
+        auto predicate = [&st](const T& k){ return st.count(k) > 1; };
+        a.erase(std::remove_if(a.begin(), a.end(), predicate), a.end());
+        out.clear();
+        for(auto val:temp)
+            out.push_back(val);
+    }
 
 
 }
