@@ -4,20 +4,20 @@
 
 #include <numeric>
 #include <unordered_set>
+#include <deque>
 #include "../include/utils.h"
 #include "../include/common.h"
 
 #ifndef AOC_23_H
 #define AOC_23_H
 namespace day23 {
-    using Clock = std::chrono::high_resolution_clock;
 
     int getDigit(int n, int position) {
         return (n % (int) pow(10, position) - (n % (int) pow(10, position - 1))) / (int) pow(10, position - 1);
     }
 
     std::pair<size_t, std::string>
-    play(size_t input, size_t num, size_t iterator, size_t length, size_t last_destination) {
+    play(size_t input, size_t iterator, size_t length) {
         vector<size_t> pickedup;
         size_t destination;
         size_t current_cup;
@@ -52,7 +52,6 @@ namespace day23 {
         }
 
         cout << "current cup:" << current_cup << endl;
-        cout << "destination:" << destination << "(" << destination_pos << ")" << endl;
 
         //legg tilbake
         std::string out;
@@ -67,7 +66,6 @@ namespace day23 {
     }
 
     void start(const string &lbl, size_t input) {
-        auto t1 = Clock::now();
         size_t result{0};
         size_t it{0};
         size_t move{0};
@@ -75,16 +73,15 @@ namespace day23 {
         vector<size_t> pickup;
         input = 389125467;
 
+        std::cout << lbl << std::endl;
+
         do {
             cout << "move: " << move + 1 << endl;
             cout << input << endl;
-            auto[last_destination, next] = play(input, 3, it, 9, prev);
+            auto[last_destination, next] = play(input, it, 9);
             prev = last_destination;
-            input = stoi(next);
+            input = std::stoi(next);
 
-            cout << "next: " << next;
-            cout << endl;
-            cout << endl;
 
             it++;
             if (it > 8)

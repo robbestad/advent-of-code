@@ -1,11 +1,6 @@
 #include <iostream>
 
 
-#include "source/2020/18.h"
-#include "source/2020/19.h"
-#include "source/2020/20.h"
-#include "source/2020/21.h"
-#include "source/2020/22.h"
 #include "source/2020/23.h"
 
 int main() {

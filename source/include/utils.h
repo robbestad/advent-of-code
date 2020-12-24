@@ -69,7 +69,7 @@ namespace utils {
     std::string unicode_to_utf8(int unicode) {
         std::string s;
 
-        if (unicode >= 0 and unicode <= 0x7f)  // 7F(16) = 127(10)
+        if (unicode >= 0 && unicode <= 0x7f)  // 7F(16) = 127(10)
         {
             s = static_cast<char>(unicode);
 
@@ -165,11 +165,9 @@ namespace utils {
 
     template<typename T>
     T get_digit(T n, size_t position) {
-        std::ostringstream os;
-        std::string digits = os.str();
         std::vector<T> vec_digits;
         while (n > 0) {
-            vec_digits.template emplace_back(n % 10);
+            vec_digits.emplace_back(n % 10);
             n = n / 10;
         }
         std::reverse(vec_digits.begin(),vec_digits.end());
@@ -177,11 +175,9 @@ namespace utils {
     }
     template<typename T>
     std::vector<T> get_digits(T n) {
-        std::ostringstream os;
-        std::string digits = os.str();
         std::vector<T> vec_digits;
         while (n > 0) {
-            vec_digits.template emplace_back(n % 10);
+            vec_digits.emplace_back(n % 10);
             n = n / 10;
         }
         std::reverse(vec_digits.begin(),vec_digits.end());

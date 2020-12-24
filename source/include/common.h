@@ -17,7 +17,4 @@ using std::unordered_set;
 using std::cout;
 using std::endl;
 using std::unordered_map;
-using std::chrono::duration_cast;
-using std::chrono::milliseconds;
-using Clock = std::chrono::high_resolution_clock;
 #endif //AOC_COMMON_H

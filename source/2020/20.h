@@ -4,6 +4,7 @@
 
 #include <numeric>
 #include <unordered_set>
+#include <chrono>
 #include "../include/utils.h"
 
 #ifndef AOC_20_H
@@ -17,8 +18,8 @@ namespace day20 {
     using std::endl;
     using std::array;
     using std::unordered_map;
-    using std::chrono::duration_cast;
-    using std::chrono::milliseconds;
+    using chrono::duration_cast;
+    using chrono::milliseconds;
     using tile_t = std::vector<std::string>;
     using ll = int64_t;
     using input_t = std::unordered_map<ll, tile_t>;
